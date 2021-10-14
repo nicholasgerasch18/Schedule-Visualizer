@@ -18,11 +18,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			//hi
-			//sdadsada
-			//sadsadsa
-			//asfhgdfahadf
-			System.out.print("HI");
+			
+			System.out.print("JC DUMB");
 			primaryStage.setTitle("Schedule Visualizer");
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
