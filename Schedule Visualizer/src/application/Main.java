@@ -55,7 +55,7 @@ public class Main extends Application {
 			         newRoot.setVgap(15);
 			         newRoot.setHgap(15);
 			         Stage stage = new Stage();
-			         stage.setTitle("Visualized Schedule");
+			         stage.setTitle("New Visualized Schedule");
 			         stage.setScene(new Scene(newRoot,400,200));
 			         stage.show();
 			     }
