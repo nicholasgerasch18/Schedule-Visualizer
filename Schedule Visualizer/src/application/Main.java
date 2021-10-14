@@ -21,6 +21,7 @@ public class Main extends Application {
 			//hi
 			//sdadsada
 			//sadsadsa
+			//asfhgdfahadf
 			System.out.print("HI");
 			primaryStage.setTitle("Schedule Visualizer");
 			BorderPane root = new BorderPane();
