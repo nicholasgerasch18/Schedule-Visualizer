@@ -51,7 +51,7 @@ public class Main extends Application {
 			         GridPane newRoot = new GridPane();
 			         
 			         Text formattedSchedule = new Text("Your schedule looks like this. Justin, Gabe, ick");
-			         System.out.println("Hi from Tauheed");
+			         System.out.println("JC sucks");
 			         
 			         newRoot.add(formattedSchedule, 0, 0);
 			         newRoot.setPadding(new Insets(10));
