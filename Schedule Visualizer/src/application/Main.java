@@ -18,6 +18,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
+			System.out.print("JC big DUMB");
 			primaryStage.setTitle("Schedule Visualizer");
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
@@ -46,14 +48,14 @@ public class Main extends Application {
 			     public void handle(ActionEvent e) {
 			         GridPane newRoot = new GridPane();
 			         
-			         Text formattedSchedule = new Text("Your schedule looks like this");
+			         Text formattedSchedule = new Text("Your schedule looks like this.");
 			         
 			         newRoot.add(formattedSchedule, 0, 0);
 			         newRoot.setPadding(new Insets(10));
 			         newRoot.setVgap(15);
 			         newRoot.setHgap(15);
 			         Stage stage = new Stage();
-			         stage.setTitle("TheCount");
+			         stage.setTitle("New Visualized Schedule");
 			         stage.setScene(new Scene(newRoot,400,200));
 			         stage.show();
 			     }
