@@ -26,7 +26,7 @@ public class Main extends Application {
 			root.setPadding(new Insets(10));
 
 			//creating window elements
-			Text scheduleVisualizer = new Text("Augustana Schedule Visualizer");
+			Text scheduleVisualizer = new Text("Augustana Schedule Visualizer v2.0");
 			root.setAlignment(scheduleVisualizer, Pos.TOP_CENTER);
 		    root.setTop(scheduleVisualizer);
 		    
