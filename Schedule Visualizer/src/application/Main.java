@@ -50,9 +50,12 @@ public class Main extends Application {
 			     public void handle(ActionEvent e) {
 			         GridPane newRoot = new GridPane();
 			         
-			         Text formattedSchedule = new Text("Your schedule looks like this. Justin, Gabe, ick");
+
+			         Text formattedSchedule = new Text("Your schedule looks like this. Justin, Gabe, Nick");			         
+
 			         System.out.println("JC sucks");
 			         
+
 			         newRoot.add(formattedSchedule, 0, 0);
 			         newRoot.setPadding(new Insets(10));
 			         newRoot.setVgap(15);
