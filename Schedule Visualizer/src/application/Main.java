@@ -48,7 +48,7 @@ public class Main extends Application {
 			     public void handle(ActionEvent e) {
 			         GridPane newRoot = new GridPane();
 			         
-			         Text formattedSchedule = new Text("Your schedule looks like this");
+			         Text formattedSchedule = new Text("Your schedule looks like this. And Justin also smells bad.");
 			         
 			         newRoot.add(formattedSchedule, 0, 0);
 			         newRoot.setPadding(new Insets(10));
