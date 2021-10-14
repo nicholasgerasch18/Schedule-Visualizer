@@ -29,6 +29,8 @@ public class Main extends Application {
 			Text scheduleVisualizer = new Text("Augustana Schedule Visualizer");
 			root.setAlignment(scheduleVisualizer, Pos.TOP_CENTER);
 		    root.setTop(scheduleVisualizer);
+		    
+		    System.out.println("Hi from Tauheed");
 			
 			TextArea textArea = new TextArea();
 			root.setMargin(textArea, new Insets(20));
