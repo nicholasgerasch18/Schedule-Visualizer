@@ -18,6 +18,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
+			
 			primaryStage.setTitle("Schedule Visualizer");
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
@@ -27,6 +29,8 @@ public class Main extends Application {
 			Text scheduleVisualizer = new Text("Augustana Schedule Visualizer");
 			root.setAlignment(scheduleVisualizer, Pos.TOP_CENTER);
 		    root.setTop(scheduleVisualizer);
+		    
+		    System.out.println("Hi from Tauheed");
 			
 			TextArea textArea = new TextArea();
 			root.setMargin(textArea, new Insets(20));
@@ -46,13 +50,18 @@ public class Main extends Application {
 			     public void handle(ActionEvent e) {
 			         GridPane newRoot = new GridPane();
 			         
+
 			         Text formattedSchedule = new Text("Your schedule looks like this. Justin, Gabe, Nick");			         
+
+			         System.out.println("JC sucks");
+			         
+
 			         newRoot.add(formattedSchedule, 0, 0);
 			         newRoot.setPadding(new Insets(10));
 			         newRoot.setVgap(15);
 			         newRoot.setHgap(15);
 			         Stage stage = new Stage();
-			         stage.setTitle("TheCount");
+			         stage.setTitle("New Visualized Schedule!!!!!");
 			         stage.setScene(new Scene(newRoot,400,200));
 			         stage.show();
 			     }
