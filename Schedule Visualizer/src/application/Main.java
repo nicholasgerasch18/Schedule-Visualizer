@@ -29,8 +29,6 @@ public class Main extends Application {
 			Text scheduleVisualizer = new Text("Augustana Schedule Visualizer");
 			root.setAlignment(scheduleVisualizer, Pos.TOP_CENTER);
 		    root.setTop(scheduleVisualizer);
-		    
-		    System.out.println("Hi from Tauheed");
 			
 			TextArea textArea = new TextArea();
 			root.setMargin(textArea, new Insets(20));
@@ -51,10 +49,7 @@ public class Main extends Application {
 			         GridPane newRoot = new GridPane();
 			         
 
-			         Text formattedSchedule = new Text("Your schedule looks like this. Justin, Gabe, Nick");			         
-
-			         System.out.println("JC sucks");
-			         
+			         Text formattedSchedule = new Text("Your schedule looks like this. Anas, Justin, Gabe, Nick");			         
 
 			         newRoot.add(formattedSchedule, 0, 0);
 			         newRoot.setPadding(new Insets(10));
