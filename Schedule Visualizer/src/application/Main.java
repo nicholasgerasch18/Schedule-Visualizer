@@ -24,7 +24,8 @@ public class Main extends Application {
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
 			root.setPadding(new Insets(10));
-
+			
+			System.out.print("hi");
 			//creating window elements
 			Text scheduleVisualizer = new Text("Augustana Schedule Visualizer");
 			root.setAlignment(scheduleVisualizer, Pos.TOP_CENTER);
