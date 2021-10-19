@@ -30,7 +30,6 @@ public class Main extends Application {
 			root.setAlignment(scheduleVisualizer, Pos.TOP_CENTER);
 		    root.setTop(scheduleVisualizer);
 		    
-		    System.out.println("Hi from Tauheed");
 			
 			TextArea textArea = new TextArea();
 			root.setMargin(textArea, new Insets(20));
@@ -51,18 +50,30 @@ public class Main extends Application {
 			         GridPane newRoot = new GridPane();
 			         
 
-			         Text formattedSchedule = new Text("Your schedule looks like this. Justin, Gabe, Nick");			         
+			         Text monday = new Text("		Monday		");		
+			         Text tuesday = new Text("Tuesday		");			         
+			         Text wednesday = new Text("Wednesday		");			         
+			         Text thursday = new Text("Thursday		");			         
+			         Text friday = new Text("Friday		");			         
+			         Text saturday = new Text("Saturday		");			         
+			         Text sunday = new Text("Sunday");			         
 
-			         System.out.println("JC sucks");
+			         newRoot.add(monday, 0, 0);
+			         newRoot.add(tuesday, 1, 0);
+			         newRoot.add(wednesday, 2, 0);
+			         newRoot.add(thursday, 3, 0);
+			         newRoot.add(friday, 4, 0);
+			         newRoot.add(saturday, 5, 0);
+			         newRoot.add(sunday, 6, 0);
+
+
 			         
-
-			         newRoot.add(formattedSchedule, 0, 0);
 			         newRoot.setPadding(new Insets(10));
 			         newRoot.setVgap(15);
 			         newRoot.setHgap(15);
 			         Stage stage = new Stage();
 			         stage.setTitle("New Visualized Schedule!!!!!");
-			         stage.setScene(new Scene(newRoot,400,200));
+			         stage.setScene(new Scene(newRoot,750,200));
 			         stage.show();
 			     }
 			 });
