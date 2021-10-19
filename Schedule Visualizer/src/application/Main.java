@@ -15,7 +15,9 @@ import javafx.scene.text.Text;
 
 
 public class Main extends Application {
+	static final int COLUMN_NUM = 12;
 	@Override
+	
 	public void start(Stage primaryStage) {
 		try {
 			
@@ -30,7 +32,7 @@ public class Main extends Application {
 			root.setAlignment(scheduleVisualizer, Pos.TOP_CENTER);
 		    root.setTop(scheduleVisualizer);
 		    
-		    System.out.println("Hi from Tauheed");
+		   
 			
 			TextArea textArea = new TextArea();
 			root.setMargin(textArea, new Insets(20));
@@ -50,7 +52,18 @@ public class Main extends Application {
 			     public void handle(ActionEvent e) {
 			         GridPane newRoot = new GridPane();
 			         
-			         Text formattedSchedule = new Text("Your schedule looks like this.");
+			         
+			         
+			         String input = textArea.getText();
+			         String[] splitInput = input.split("\n");
+			         for(int i = 0; i<splitInput.length; i++) {
+			        	 System.out.println(splitInput[i] );
+			         }
+			         
+			         
+			         //output text
+			         Text formattedSchedule = new Text(splitInput[0]);
+			         
 			         
 			         newRoot.add(formattedSchedule, 0, 0);
 			         newRoot.setPadding(new Insets(10));
