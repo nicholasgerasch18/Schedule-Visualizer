@@ -58,7 +58,7 @@ public class Main extends Application {
 			         String[] splitInput = input.split("\n");
 			         for(int i = 0; i<splitInput.length; i++) {
 			        	 System.out.println(splitInput[i] );
-			        	 System.out.println(splitInput[i] );
+			        	 
 			         }
 			         
 			         
