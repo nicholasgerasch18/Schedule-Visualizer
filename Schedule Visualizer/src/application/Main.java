@@ -108,7 +108,7 @@ public class Main extends Application {
 			         newRoot.setHgap(15);
 			         newRoot.setAlignment(Pos.BASELINE_CENTER);
 			         Stage stage = new Stage();
-			         stage.setTitle("New Visualized Schedule!!!!!");
+			         stage.setTitle("New Visualized Schedule!!!");
 			         stage.setScene(new Scene(newRoot,1150,850));
 			         stage.show();
 			     }
