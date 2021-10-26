@@ -49,31 +49,67 @@ public class Main extends Application {
 			     public void handle(ActionEvent e) {
 			         GridPane newRoot = new GridPane();
 			         
-
+			         //adds days of the week to the calendar
 			         Text monday = new Text("		Monday		");		
-			         Text tuesday = new Text("Tuesday		");			         
-			         Text wednesday = new Text("Wednesday		");			         
-			         Text thursday = new Text("Thursday		");			         
-			         Text friday = new Text("Friday		");			         
-			         Text saturday = new Text("Saturday		");			         
-			         Text sunday = new Text("Sunday");			         
+			         Text tuesday = new Text("		Tuesday		");			         
+			         Text wednesday = new Text("		Wednesday		");			         
+			         Text thursday = new Text("		Thursday		");			         
+			         Text friday = new Text("		Friday		");			         
+			         Text saturday = new Text("		Saturday		");			         
+			         Text sunday = new Text("		Sunday		");			         
 
-			         newRoot.add(monday, 0, 0);
-			         newRoot.add(tuesday, 1, 0);
-			         newRoot.add(wednesday, 2, 0);
-			         newRoot.add(thursday, 3, 0);
-			         newRoot.add(friday, 4, 0);
-			         newRoot.add(saturday, 5, 0);
-			         newRoot.add(sunday, 6, 0);
-
-
+			         newRoot.add(monday, 1, 0);
+			         newRoot.add(tuesday, 2, 0);
+			         newRoot.add(wednesday, 3, 0);
+			         newRoot.add(thursday, 4, 0);
+			         newRoot.add(friday, 5, 0);
+			         newRoot.add(saturday, 6, 0);
+			         newRoot.add(sunday, 7, 0);
 			         
+			         //adds times to the calendar
+			         Text eightAM = new Text("8:00am");
+			         Text nineAM = new Text("9:00am");
+			         Text tenAM = new Text("10:00am");
+			         Text elevenAM = new Text("11:00am");
+			         Text noon = new Text("12:00pm");
+			         Text onePM = new Text("1:00pm");
+			         Text twoPM = new Text("2:00pm");
+			         Text threePM = new Text("3:00pm");
+			         Text fourPM = new Text("4:00pm");
+			         Text fivePM = new Text("5:00pm");
+			         Text sixPM = new Text("6:00pm");
+			         Text sevenPM = new Text("7:00pm");
+			         Text eightPM = new Text("8:00pm");
+			         Text ninePM = new Text("9:00pm");
+			         Text tenPM = new Text("10:00pm");
+			         
+			         // adds the hours to the gridPane
+			         newRoot.add(eightAM, 0, 0);
+			         newRoot.add(nineAM, 0, 1);
+			         newRoot.add(tenAM, 0, 2);
+			         newRoot.add(elevenAM, 0, 3);
+			         newRoot.add(noon, 0, 4);
+			         newRoot.add(onePM, 0, 5);
+			         newRoot.add(twoPM, 0, 6);
+			         newRoot.add(threePM, 0, 7);
+			         newRoot.add(fourPM, 0, 8);
+			         newRoot.add(fivePM, 0, 9);
+			         newRoot.add(sixPM, 0, 10);
+			         newRoot.add(sevenPM, 0, 11);
+			         newRoot.add(eightPM, 0, 12);
+			         newRoot.add(ninePM, 0, 13);
+			         newRoot.add(tenPM, 0, 14);
+			         
+
+
+			         newRoot.setGridLinesVisible(true);
 			         newRoot.setPadding(new Insets(10));
-			         newRoot.setVgap(15);
+			         newRoot.setVgap(40);
 			         newRoot.setHgap(15);
+			         newRoot.setAlignment(Pos.BASELINE_CENTER);
 			         Stage stage = new Stage();
 			         stage.setTitle("New Visualized Schedule!!!!!");
-			         stage.setScene(new Scene(newRoot,750,200));
+			         stage.setScene(new Scene(newRoot,1150,850));
 			         stage.show();
 			     }
 			 });
