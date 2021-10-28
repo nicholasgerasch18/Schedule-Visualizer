@@ -20,7 +20,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			
-
+			System.out.print("hi");
 			primaryStage.setTitle("Schedule Visualizer");
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 400, 400);
