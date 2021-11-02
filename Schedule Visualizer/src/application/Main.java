@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -47,31 +49,83 @@ public class Main extends Application {
 			submit.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent e) {
 					GridPane newRoot = new GridPane();
-
+					
+					ArrayList<String> courseCodes = new ArrayList<String>();
+					ArrayList<String> courseName = new ArrayList<String>();
+					ArrayList<String> teacherName = new ArrayList<String>();
+					ArrayList<String> classroom = new ArrayList<String>();
+					ArrayList<String> primaryDay = new ArrayList<String>();
+					ArrayList<String> secondaryDay = new ArrayList<String>();
+					ArrayList<String> primaryTime = new ArrayList<String>();
+					ArrayList<String> secondaryTime = new ArrayList<String>();
+					
+					
 					String input = textArea.getText();
 					String[] splitInput = input.split("\n");
 					int length = splitInput.length;
 					int size = ((splitInput.length)/COLUMN_NUM);
-					System.out.println(size);
 					
-			
-					int count = COLUMN_NUM;
-					
-					
-					for (int j = count; j < length; j++) {
-						
-						
-						String[] courseInfo = new String[COLUMN_NUM];
-						for (int i = 0; i < COLUMN_NUM; i++) {
-							
-							count++;
-						}
-						Course course = new Course(courseInfo);
-					}
 					
 //					for (int i = 0; i < splitInput.length; i++) {
-//						System.out.println(splitInput[i]);
+//						String current = splitInput[i];
+//						if(current is in coursecodes) {
+//							courseCodes.add(splitInput[i]);
+//						}else if(class name) {
+//							courseName.add(splitInput[i]);
+//						}else if(sort out teacher name) {
+//							teacherName.add(splitInput[i]);
+//						}else if(sort through building) {
+//							classroom.add(splitInput[i]);
+//						}else if(sort by mwf date) {
+//							if(courseCodes.size() == primaryDay.size()) {
+//								secondaryDay.add(splitInput[i]);
+//							}else {
+//								primaryDay.add(splitInput[i]);
+//							}
+//						}else if(sorting of the times) {
+//							if(courseCodes.size() == primaryTime.size()) {
+//								secondaryTime.add(splitInput[i]);
+//							}else {
+//								primaryDay.Time(splitInput[i]);
+//							}
+//						}
 //					}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+			
+//					int count = COLUMN_NUM;
+//					
+//					
+//					for (int j = count; j < length; j++) {
+//						
+//						
+//						String[] courseInfo = new String[COLUMN_NUM];
+//						for (int i = 0; i < COLUMN_NUM; i++) {
+//							
+//							count++;
+//						}
+//						Course course = new Course(courseInfo);
+//					}
+					
+					for (int i = 0; i < splitInput.length; i++) {
+						System.out.println(splitInput[i]);
+					}
 
 //			         String[][] classMatrix = new String[size][COLUMN_NUM];
 //			         int count = 0;
