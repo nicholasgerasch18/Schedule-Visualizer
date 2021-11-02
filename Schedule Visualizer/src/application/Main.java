@@ -16,6 +16,14 @@ import javafx.scene.text.Text;
 public class Main extends Application {
 	
 	final int COLUMN_NUM = 12;
+	final String[] COURSE_CODES = {"ACCT","AFSP","ARHI","ART","ASTR",
+			"BIOL","BUSN","CHEM","CHNS","CHST","CLAS","COMM","CSC",
+			"CSD","DATA","ECON","EDMU","EDUC","ENCW","ENGL","ENTM",
+			"ENVR","FREN","FYH","FYI","GEOG","GEOL","GIST","GRD","GREK",
+			"GRMN","GRST","HEPE","HIST","HONR","JPN","KINS","LATN",
+			"MATH","MUCH","MUEN","MUSC","PHIL","PHYS","PSYC","PUBH",
+			"RELG"};
+	final String[] BUILDING_NAMES = {"CARV","EVLD","LIND","OLIN","SCIE"};
 	@Override
 	public void start(Stage primaryStage) {
 		try {
