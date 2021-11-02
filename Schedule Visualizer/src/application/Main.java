@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -18,19 +19,20 @@ import javafx.scene.text.Text;
 public class Main extends Application {
 	
 	final int COLUMN_NUM = 12;
-	final String[] COURSE_CODES = {"ACCT","AFSP","ARHI","ART","ASTR",
+	final ArrayList<String> COURSE_CODES = new ArrayList<String>(Arrays.asList("ACCT","AFSP","ARHI","ART","ASTR",
 			"BIOL","BUSN","CHEM","CHNS","CHST","CLAS","COMM","CSC",
 			"CSD","DATA","ECON","EDMU","EDUC","ENCW","ENGL","ENTM",
 			"ENVR","FREN","FYH","FYI","GEOG","GEOL","GIST","GRD","GREK",
 			"GRMN","GRST","HEPE","HIST","HONR","JPN","KINS","LATN",
 			"MATH","MUCH","MUEN","MUSC","PHIL","PHYS","PSYC","PUBH",
-			"RELG"};
-	final String[] BUILDING_NAMES = {"CARV","EVLD","LIND","OLIN","SCIE"};
+			"RELG"));
+	final ArrayList<String> BUILDING_NAMES = new ArrayList<String>(Arrays.asList("CARV","EVLD","LIND","OLIN","SCIE"));
+	final ArrayList<String> DAYS = new ArrayList<String>(Arrays.asList("M ", "Tu ", "W ", "Th ", "F ","M W F ", "Tu Th ", "M W ","M F ", "W F "));
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			
-			System.out.print("hello there");
+			
 			primaryStage.setTitle("Schedule Visualizer");
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 400, 400);
@@ -74,16 +76,28 @@ public class Main extends Application {
 					int size = ((splitInput.length)/COLUMN_NUM);
 					
 					
-//					for (int i = 0; i < splitInput.length; i++) {
-//						String current = splitInput[i];
-//						if(current is in coursecodes) {
-//							courseCodes.add(splitInput[i]);
-//						}else if(class name) {
-//							courseName.add(splitInput[i]);
-//						}else if(sort out teacher name) {
-//							teacherName.add(splitInput[i]);
-//						}else if(sort through building) {
-//							classroom.add(splitInput[i]);
+					for (int i = 0; i < splitInput.length; i++) {
+						String current = splitInput[i];
+						String[] currentsplit = current.split("-");
+						if(COURSE_CODES.contains(currentsplit[0])) {
+							courseCodes.add(splitInput[i]);
+							courseName.add(splitInput[i+1]);
+							i++;
+						}else if(current.contains(",")) {
+							teacherName.add(current);
+						}else if(BUILDING_NAMES.contains(current)) {
+							classroom.add(splitInput[i] + " " +splitInput[i+1]);
+						}else if(DAYS.contains(current)) {
+							if(courseCodes.size() == primaryDay.size()) {
+								// need to work on parsing second day
+								secondaryDay.add(secondaryDay.size(),splitInput[i]);
+							}else {
+								primaryDay.add(splitInput[i]);
+								secondaryDay.add(" ");
+							}
+						}
+					
+//						
 //						}else if(sort by mwf date) {
 //							if(courseCodes.size() == primaryDay.size()) {
 //								secondaryDay.add(splitInput[i]);
@@ -97,12 +111,13 @@ public class Main extends Application {
 //								primaryDay.Time(splitInput[i]);
 //							}
 //						}
-//					}
+					}
 					
 					
-					
-					
-					
+					for(int n = 0; n<secondaryDay.size();n++) {
+						System.out.println(secondaryDay.get(n));
+					}
+//					
 					
 					
 					
@@ -131,9 +146,9 @@ public class Main extends Application {
 //						Course course = new Course(courseInfo);
 //					}
 					
-					for (int i = 0; i < splitInput.length; i++) {
-						System.out.println(splitInput[i]);
-					}
+//					for (int i = 0; i < splitInput.length; i++) {
+//						System.out.println(splitInput[i]);
+//					}
 
 //			         String[][] classMatrix = new String[size][COLUMN_NUM];
 //			         int count = 0;
