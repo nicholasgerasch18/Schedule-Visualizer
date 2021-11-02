@@ -116,6 +116,7 @@ public class Main extends Application {
 					
 					for(int n = 0; n<secondaryDay.size();n++) {
 						System.out.println(secondaryDay.get(n));
+						System.out.println(secondaryDay.get(n));
 					}
 //					
 					
