@@ -1,5 +1,8 @@
 package application;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,13 +19,13 @@ import javafx.scene.text.Text;
 public class Main extends Application {
 	
 	final int COLUMN_NUM = 12;
-	final String[] COURSE_CODES = {"ACCT","AFSP","ARHI","ART","ASTR",
+	final ArrayList<String> COURSE_CODES = new ArrayList<>(Arrays.asList("ACCT","AFSP","ARHI","ART","ASTR",
 			"BIOL","BUSN","CHEM","CHNS","CHST","CLAS","COMM","CSC",
-			"CSD","DATA","ECON","EDMU","EDUC","ENCW","ENGL","ENTM",
+			"CSD","DATA","ECON","EDMU","EDUC","ENCW","ENGL","ENGR","ENTM",
 			"ENVR","FREN","FYH","FYI","GEOG","GEOL","GIST","GRD","GREK",
-			"GRMN","GRST","HEPE","HIST","HONR","JPN","KINS","LATN",
-			"MATH","MUCH","MUEN","MUSC","PHIL","PHYS","PSYC","PUBH",
-			"RELG"};
+			"GRMN","GRST","HEPE","HIST","HONR","ISS","JPN","JPST","KINS","LATN",
+			"LING","LSC","MATH","MJMC","MUCH","MUEN","MUSC","PHIL","PHYS","POLS","PSYC","PUBH",
+			"RELG","SCAN","SLP","SOAN","SPAN","SWED","THEA","WGSS"));
 	final String[] BUILDING_NAMES = {"CARV","EVLD","LIND","OLIN","SCIE"};
 	@Override
 	public void start(Stage primaryStage) {
