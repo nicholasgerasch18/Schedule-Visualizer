@@ -19,15 +19,19 @@ import javafx.scene.text.Text;
 public class Main extends Application {
 	
 	final int COLUMN_NUM = 12;
-	final ArrayList<String> COURSE_CODES = new ArrayList<String>(Arrays.asList("ACCT","AFSP","ARHI","ART","ASTR",
-			"BIOL","BUSN","CHEM","CHNS","CHST","CLAS","COMM","CSC",
-			"CSD","DATA","ECON","EDMU","EDUC","ENCW","ENGL","ENTM",
-			"ENVR","FREN","FYH","FYI","GEOG","GEOL","GIST","GRD","GREK",
-			"GRMN","GRST","HEPE","HIST","HONR","JPN","KINS","LATN",
-			"MATH","MUCH","MUEN","MUSC","PHIL","PHYS","PSYC","PUBH",
-			"RELG"));
-	final ArrayList<String> BUILDING_NAMES = new ArrayList<String>(Arrays.asList("CARV","EVLD","LIND","OLIN","SCIE"));
-	final ArrayList<String> DAYS = new ArrayList<String>(Arrays.asList("M ", "Tu ", "W ", "Th ", "F ","M W F ", "Tu Th ", "M W ","M F ", "W F "));
+	final ArrayList<String> COURSE_CODES = new ArrayList<String>(Arrays.asList(
+			"ACCT","AFSP","ARHI","ART","ASTR","BIOL","BUSN","CHEM","CHNS","CHST",
+			"CLAS","COMM","CSC","CSD","DATA","ECON","EDMU","EDUC","ENCW","ENGL",
+			"ENTM","ENVR","FREN","FRST","FYH","FYI","GEOG","GEOL","GIST","GRD",
+			"GREK","GRMN","GRST","HEPE","HIST","HONR","ISS","JPN","JPST","KINS",
+			"LATN","LING","LSC","LTAM","MATH","MJMC","MUCH","MUEN","MUSC","PHIL",
+			"PHYS","POLS","PSYC","PUBH","RELG","SCAN","SLP","SOAN","SPAN","SPST",
+			"SWED","THEA","WGSS"));
+	final ArrayList<String> BUILDING_NAMES = new ArrayList<String>(Arrays.asList(
+			"BERG","CARV","EVLD","LIND","OLIN","SCIE","SORN"));
+	final ArrayList<String> DAYS = new ArrayList<String>(Arrays.asList(
+			"M ", "Tu ", "W ", "Th ", "F ","M W F ", "Tu Th ", "M W ","M F ", 
+			"W F ", "Tu W Th F ", "M Tu W Th F "));
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -114,9 +118,13 @@ public class Main extends Application {
 					}
 					
 					
+					
 					for(int n = 0; n<secondaryDay.size();n++) {
 						System.out.println(secondaryDay.get(n));
 						System.out.println(secondaryDay.get(n));
+					}
+					for(int n = 0; n<courseCodes.size();n++) {
+						System.out.println(courseCodes.get(n));
 					}
 //					
 					
@@ -245,6 +253,30 @@ public class Main extends Application {
 
 		public Course(String[] course) {
 
+		}
+		
+		public String getCourseCode() {
+			return courseCode;
+		}
+		
+		public String getProfessor() {
+			return professor;
+		}
+		
+		public String getWeekdays1() {
+			return weekdays1;
+		}
+		
+		public String getTime1() {
+			return time1;
+		}
+		
+		public String getWeekdays2() {
+			return weekdays2;
+		}
+		
+		public String getTime2() {
+			return time2;
 		}
 
 	}
