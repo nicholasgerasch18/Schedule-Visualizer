@@ -19,8 +19,8 @@ import javafx.scene.text.Text;
 public class Main extends Application {
 
 	final int COLUMN_NUM = 12;
-	final ArrayList<String> COURSE_CODES = new ArrayList<String>(Arrays.asList("ACCT", "AFSP", "ARHI", "ART", "ASTR",
-			"BIOL", "BUSN", "CHEM", "CHNS", "CHST", "CLAS", "COMM", "CSC", "CSD", "DATA", "ECON", "EDMU", "EDUC",
+	final ArrayList<String> COURSE_CODES = new ArrayList<String>(Arrays.asList("ACCT", "AFSP", "ARHI", "ART", "ASTR", "AUGIE",
+			"BIOL", "BUSN", "CHEM", "CHNS", "CHST", "CLAS", "COMM", "CORE", "CSC", "CSD", "DATA", "ECON", "EDMU", "EDUC",
 			"ENCW", "ENGL", "ENTM", "ENVR", "FREN", "FRST", "FYH", "FYI", "GEOG", "GEOL", "GIST", "GRD", "GREK", "GRMN",
 			"GRST", "HEPE", "HIST", "HONR", "ISS", "JPN", "JPST", "KINS", "LATN", "LING", "LSC", "LTAM", "MATH", "MJMC",
 			"MUCH", "MUEN", "MUSC", "PHIL", "PHYS", "POLS", "PSYC", "PUBH", "RELG", "SCAN", "SLP", "SOAN", "SPAN",
@@ -74,7 +74,8 @@ public class Main extends Application {
 					String[] splitInput = input.split("\n");
 					int length = splitInput.length;
 					int size = ((splitInput.length) / COLUMN_NUM);
-
+					int count = 1;
+					int count2=1;
 					for (int i = 0; i < splitInput.length; i++) {
 						String current = splitInput[i];
 						String[] currentsplit = current.split("-");
@@ -82,6 +83,13 @@ public class Main extends Application {
 							courseCodes.add(splitInput[i]);
 							courseName.add(splitInput[i + 1]);
 							i++;
+							if(currentsplit[0].equals("CORE") || currentsplit[0].equals("AUGIE")) {
+								primaryDay.add(" ");
+								primaryTime.add(" ");
+								secondaryDay.add(" ");
+								secondaryTime.add(" ");
+								classroom.add(" ");
+							}
 						} else if (current.contains(",")) {
 							teacherName.add(current);
 						} else if (BUILDING_NAMES.contains(current)) {
@@ -89,14 +97,16 @@ public class Main extends Application {
 						} else if (DAYS.contains(current)) {
 							if (courseCodes.size() == primaryDay.size()) {
 								// need to work on parsing second day
-								secondaryDay.add(secondaryDay.size() - 1, splitInput[i]);
+								secondaryDay.add(secondaryDay.size() - count, splitInput[i]);
+								count++;
 							} else {
 								primaryDay.add(splitInput[i]);
 								secondaryDay.add(" ");
 							}
 						} else if (current.contains(":")) {
 							if (courseCodes.size() == primaryTime.size()) {
-								secondaryTime.add(secondaryTime.size() - 1, splitInput[i]);
+								secondaryTime.add(secondaryTime.size() - count2, splitInput[i]);
+								count2++;
 							} else {
 								primaryTime.add(splitInput[i]);
 								secondaryTime.add(" ");
