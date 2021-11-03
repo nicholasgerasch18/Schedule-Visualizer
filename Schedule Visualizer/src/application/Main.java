@@ -90,77 +90,35 @@ public class Main extends Application {
 						}else if(DAYS.contains(current)) {
 							if(courseCodes.size() == primaryDay.size()) {
 								// need to work on parsing second day
-								secondaryDay.add(secondaryDay.size(),splitInput[i]);
+								secondaryDay.add(secondaryDay.size()-1,splitInput[i]);
 							}else {
 								primaryDay.add(splitInput[i]);
 								secondaryDay.add(" ");
 							}
+						}else if(current.contains(":")) {
+							if(courseCodes.size() == primaryTime.size()) {
+								secondaryTime.add(secondaryTime.size()-1,splitInput[i]);
+							}else {
+								primaryTime.add(splitInput[i]);
+								secondaryTime.add(" ");
+							}
 						}
 					
-//						
-//						}else if(sort by mwf date) {
-//							if(courseCodes.size() == primaryDay.size()) {
-//								secondaryDay.add(splitInput[i]);
-//							}else {
-//								primaryDay.add(splitInput[i]);
-//							}
-//						}else if(sorting of the times) {
-//							if(courseCodes.size() == primaryTime.size()) {
-//								secondaryTime.add(splitInput[i]);
-//							}else {
-//								primaryDay.Time(splitInput[i]);
-//							}
-//						}
-					}
-					
-					
-					for(int n = 0; n<secondaryDay.size();n++) {
-						System.out.println(secondaryDay.get(n));
-						System.out.println(secondaryDay.get(n));
-					}
-//					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-			
-//					int count = COLUMN_NUM;
-//					
-//					
-//					for (int j = count; j < length; j++) {
-//						
-//						
-//						String[] courseInfo = new String[COLUMN_NUM];
-//						for (int i = 0; i < COLUMN_NUM; i++) {
-//							
-//							count++;
-//						}
-//						Course course = new Course(courseInfo);
-//					}
-					
-//					for (int i = 0; i < splitInput.length; i++) {
-//						System.out.println(splitInput[i]);
-//					}
 
-//			         String[][] classMatrix = new String[size][COLUMN_NUM];
-//			         int count = 0;
-//			         for(int i = 0; i<size;i++) {
-//			        	 for(int n = 0; i<COLUMN_NUM;n++) {
-//			        		 String current = splitInput[count];
-//			        		 classMatrix[i][n]="hi";
-//			        		 count++;
-//			        	 }
-//			         }
-//			         		         
+					}
+					
+					ArrayList<Course> courseArray = new ArrayList<Course>();
+					for(int n = 0; n<courseCodes.size();n++) {
+						courseArray.add(new Course(courseCodes.get(n), courseName.get(n), teacherName.get(n), classroom.get(n), primaryDay.get(n), secondaryDay.get(n), primaryTime.get(n), secondaryTime.get(n)));
+						
+					}
+					
+					
+					for(int j = 0; j<courseArray.size();j++) {
+						System.out.println(courseArray.get(j).displayClass());
+						System.out.println();
+					}
+	         		         
 
 					
 			         
@@ -237,14 +195,56 @@ public class Main extends Application {
 	private class Course {
 	
 		private String courseCode;
-		private String professor;
-		private String weekdays1;
-		private String time1;
-		private String weekdays2;
-		private String time2;
+		private String courseName;
+		private String teacherName;
+		private String classroom;
+		private String primaryDay;
+		private String primaryTime;
+		private String secondaryDay;
+		private String secondaryTime;
 
-		public Course(String[] course) {
-
+		public Course(String courseCode, String courseName, String teacherName, String classroom, String primaryDay, String secondaryDay, String primaryTime, String secondaryTime) {
+			this.courseCode = courseCode;
+			this.courseName = courseName;
+			this.teacherName = teacherName;
+			this.classroom = classroom;
+			this.primaryDay = primaryDay;
+			this.primaryTime = primaryTime;
+			this.secondaryDay = secondaryDay;
+			this.secondaryTime = secondaryTime;
+			
+		}
+		private String getCourseCode() {
+			return courseCode;
+		}
+		private String getteacherName() {
+			return teacherName;
+		}
+		private String getClassroom() {
+			return classroom;
+		}
+		private String getPrimaryDay() {
+			return primaryDay;
+		}
+		private String getPrimaryTime() {
+			return primaryTime;
+		}
+		private String getSecondaryDay() {
+			return secondaryDay;
+		}
+		private String SecondaryTime() {
+			return secondaryTime;
+		}
+		private String displayClass() {
+			if(secondaryDay == " ") {
+				String output = classroom+"\n"+teacherName+"\n"+courseCode+"\n"+courseName+"\n"+primaryDay+"\n"+primaryTime;
+				return output;
+			}else {
+				String output = classroom+"\n"+teacherName+"\n"+courseCode+"\n"+courseName+"\n"+primaryDay+"\n"+primaryTime+"\n"+secondaryDay+"\n"+secondaryTime;
+				return output;
+			}
+			
+			
 		}
 
 	}
