@@ -33,7 +33,7 @@ public class Main extends Application {
 		try {
 			
 			
-			primaryStage.setTitle("Schedule Visualizer");
+			primaryStage.setTitle("Schedule Visualizer!!");
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 400, 400);
 			root.setPadding(new Insets(10));
