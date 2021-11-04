@@ -26,7 +26,7 @@ public class Main extends Application {
 			"MUCH", "MUEN", "MUSC", "MULS", "PHIL", "PHYS", "POLS", "PSYC", "PUBH", "RELG", "SCAN", "SLP", "SOAN", "SPAN",
 			"SPST", "SWED", "THEA", "WGSS"));
 	final ArrayList<String> BUILDING_NAMES = new ArrayList<String>(
-			Arrays.asList("BERG", "CARV", "DENK","EVLD", "LIND", "OLDM", "OLIN", "SCIE", "SORN"));
+			Arrays.asList("BERG", "CARV", "DENK","EVLD", "LIND", "OLDM", "OLIN", "SCIE", "SORN", "WESTIE"));
 	final ArrayList<String> DAYS = new ArrayList<String>(Arrays.asList("M ", "Tu ", "W ", "Th ", "F ", "M W F ",
 			"Tu Th ", "M W ", "M F ", "W F ", "Tu W Th F ", "M Tu W Th F "));
 
