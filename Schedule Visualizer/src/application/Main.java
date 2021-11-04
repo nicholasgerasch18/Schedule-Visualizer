@@ -23,10 +23,10 @@ public class Main extends Application {
 			"BIOL", "BUSN", "CHEM", "CHNS", "CHST", "CLAS", "COMM", "CORE", "CSC", "CSD", "DATA", "ECON", "EDMU", "EDUC",
 			"ENCW", "ENGL", "ENTM", "ENVR", "FREN", "FRST", "FYH", "FYI", "GEOG", "GEOL", "GIST", "GRD", "GREK", "GRMN",
 			"GRST", "HEPE", "HIST", "HONR", "ISS", "JPN", "JPST", "KINS", "LATN", "LING", "LSC", "LTAM", "MATH", "MJMC",
-			"MUCH", "MUEN", "MUSC", "PHIL", "PHYS", "POLS", "PSYC", "PUBH", "RELG", "SCAN", "SLP", "SOAN", "SPAN",
+			"MUCH", "MUEN", "MUSC", "MULS", "PHIL", "PHYS", "POLS", "PSYC", "PUBH", "RELG", "SCAN", "SLP", "SOAN", "SPAN",
 			"SPST", "SWED", "THEA", "WGSS"));
 	final ArrayList<String> BUILDING_NAMES = new ArrayList<String>(
-			Arrays.asList("BERG", "CARV", "EVLD", "LIND", "OLDM", "OLIN", "SCIE", "SORN"));
+			Arrays.asList("BERG", "CARV", "DENK","EVLD", "LIND", "OLDM", "OLIN", "SCIE", "SORN"));
 	final ArrayList<String> DAYS = new ArrayList<String>(Arrays.asList("M ", "Tu ", "W ", "Th ", "F ", "M W F ",
 			"Tu Th ", "M W ", "M F ", "W F ", "Tu W Th F ", "M Tu W Th F "));
 
@@ -82,18 +82,20 @@ public class Main extends Application {
 						if (COURSE_CODES.contains(currentsplit[0])) {
 							courseCodes.add(splitInput[i]);
 							courseName.add(splitInput[i + 1]);
-							i++;
-							if(currentsplit[0].equals("CORE") || currentsplit[0].equals("AUGIE")) {
-								primaryDay.add(" ");
-								primaryTime.add(" ");
-								secondaryDay.add(" ");
-								secondaryTime.add(" ");
-								classroom.add(" ");
-							}
+							
+							
+							teacherName.add(" ");
+							primaryDay.add(" ");
+							primaryTime.add(" ");
+							secondaryDay.add(" ");
+							secondaryTime.add(" ");
+							classroom.add(" ");
+							
+							
 						} else if (current.contains(",")) {
-							teacherName.add(current);
+							teacherName.add(courseCodes.size()-1,current);
 						} else if (BUILDING_NAMES.contains(current)) {
-							classroom.add(splitInput[i] + " " + splitInput[i + 1]);
+							classroom.add(courseCodes.size()-1,splitInput[i] + " " + splitInput[i + 1]);
 						} else if (DAYS.contains(current)) {
 							if (courseCodes.size() == primaryDay.size()) {
 								// need to work on parsing second day
@@ -125,7 +127,7 @@ public class Main extends Application {
 
 					for (int j = 0; j < courseArray.size(); j++) {
 						System.out.println(courseArray.get(j).displayClass());
-						System.out.println();
+						
 					}
 
 					// adds days of the week to the calendar
@@ -206,6 +208,7 @@ public class Main extends Application {
 		private String primaryTime;
 		private String secondaryDay;
 		private String secondaryTime;
+		private ArrayList<String> courseInfo;
 
 		public Course(String courseCode, String courseName, String teacherName, String classroom, String primaryDay,
 				String secondaryDay, String primaryTime, String secondaryTime) {
@@ -217,7 +220,7 @@ public class Main extends Application {
 			this.primaryTime = primaryTime;
 			this.secondaryDay = secondaryDay;
 			this.secondaryTime = secondaryTime;
-
+			courseInfo = new ArrayList<String>(Arrays.asList(classroom,teacherName,courseCode,courseName,primaryDay,primaryTime,secondaryDay,secondaryTime));
 		}
 
 		private String getCourseCode() {
@@ -249,16 +252,15 @@ public class Main extends Application {
 		}
 
 		private String displayClass() {
-			if (secondaryDay == " ") {
-				String output = classroom + "\n" + teacherName + "\n" + courseCode + "\n" + courseName + "\n"
-						+ primaryDay + "\n" + primaryTime;
-				return output;
-			} else {
-				String output = classroom + "\n" + teacherName + "\n" + courseCode + "\n" + courseName + "\n"
-						+ primaryDay + "\n" + primaryTime + "\n" + secondaryDay + "\n" + secondaryTime;
-				return output;
-			}
 
+			String output = "";
+			for(int k=0; k<courseInfo.size();k++) {
+				if(!(courseInfo.get(k).equals("") || courseInfo.get(k).equals(" "))) {
+					output+=courseInfo.get(k)+"\n";
+					
+				}
+			}
+			return output;
 		}
 
 	}
