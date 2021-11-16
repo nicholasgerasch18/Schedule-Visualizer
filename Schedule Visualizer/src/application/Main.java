@@ -21,14 +21,15 @@ import javafx.scene.text.Text;
 public class Main extends Application {
 
 	final int COLUMN_NUM = 12;
-	final ArrayList<String> COURSE_CODES = new ArrayList<String>(Arrays.asList("ACCT", "AFSP", "ARHI", "ART", "ASTR", "AUGIE",
-			"BIOL", "BUSN", "CHEM", "CHNS", "CHST", "CLAS", "COMM", "CORE", "CSC", "CSD", "DATA", "ECON", "EDMU", "EDUC",
-			"ENCW", "ENGL", "ENTM", "ENVR", "FREN", "FRST", "FYH", "FYI", "GEOG", "GEOL", "GIST", "GRD", "GREK", "GRMN",
-			"GRST", "HEPE", "HIST", "HONR", "ISS", "JPN", "JPST", "KINS", "LATN", "LING", "LSC", "LTAM", "MATH", "MJMC",
-			"MUCH", "MUEN", "MUSC", "MULS", "PHIL", "PHYS", "POLS", "PSYC", "PUBH", "RELG", "SCAN", "SLP", "SOAN", "SPAN",
-			"SPST", "SWED", "THEA", "WGSS"));
+	final ArrayList<String> COURSE_CODES = new ArrayList<String>(Arrays.asList("ACCT", "AFSP","APMA", "ARHI", "ART", "ASIA", 
+			"ASTR", "AUGIE", "BIOL", "BUSN", "CHEM", "CHNS", "CHST", "CLAS", "COMM", "CORE", "CSC", "CSD", "DATA", "ECON", 
+			"EDMU", "EDUC", "ENCW", "ENGL", "ENGR", "ENTM", "ENVR", "FOOD", "FREN", "FRST", "FYH", "FYI", "GEOG", "GEOL", "GIST", 
+			"GRD", "GREK", "GRMN", "GRST", "HEPE", "HIST", "HONR", "ISS", "JPN", "JPST", "KINS", "LATN", "LING", "LSC", "LTAM", 
+			"MATH", "MJMC", "MSCI", "MUCH", "MUEN", "MUSC", "MULS", "NTGR", "PHIL", "PHYS", "POLS", "PSYC", "PUBH", "RELG", 
+			"SCAN", "SLP", "SOAN", "SPAN", "SPRI", "SPST", "SWED", "THEA", "WGSS", "WLIT", "WLCC"));
 	final ArrayList<String> BUILDING_NAMES = new ArrayList<String>(
-			Arrays.asList("BERG", "CARV", "DENK","EVLD", "LIND", "OLDM", "OLIN", "SCIE", "SORN"));
+			Arrays.asList("ABST", "AND", "ANNX", "ARPO", "ARTS", "BERG", "BROD", "BRUN", "CARH", "CARV", "DENK", "EVLD", 
+					"JDPL", "LIBR", "LIND", "OLDM", "OLIN", "SCIE", "SORN", "SWEN"));
 	final ArrayList<String> DAYS = new ArrayList<String>(Arrays.asList("M ", "Tu ", "W ", "Th ", "F ", "M W F ",
 			"Tu Th ", "M W ", "M F ", "W F ", "Tu W Th F ", "M Tu W Th F "));
 
