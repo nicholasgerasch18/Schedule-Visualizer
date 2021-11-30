@@ -100,27 +100,31 @@ public class Main extends Application {
 						} else if (BUILDING_NAMES.contains(current)) {
 							classroom.add(courseCodes.size()-1,splitInput[i] + " " + splitInput[i + 1]);
 						} else if (DAYS.contains(current)) {
-							if (courseCodes.size() == primaryDay.size()) {
+							if (primaryDay.get(courseCodes.size()-1).equals(" ")) {
 								// need to work on parsing second day
-								secondaryDay.add(secondaryDay.size() - count, splitInput[i]);
-								count++;
+								//primaryDay.add(splitInput[i]);
+								primaryDay.add(courseCodes.size()-1, splitInput[i]);
+								
 							} else {
-								primaryDay.add(splitInput[i]);
-								secondaryDay.add(" ");
+								secondaryDay.add(courseCodes.size() - 1, splitInput[i]);
+								
+								
 							}
 						} else if (current.contains(":")) {
-							if (courseCodes.size() == primaryTime.size()) {
-								secondaryTime.add(secondaryTime.size() - count2, splitInput[i]);
-								count2++;
+							if (primaryTime.get(courseCodes.size()-1).equals(" ")) {
+								primaryTime.add(courseCodes.size()-1, splitInput[i]);
+								
 							} else {
-								primaryTime.add(splitInput[i]);
-								secondaryTime.add(" ");
+								secondaryTime.add(courseCodes.size()-1, splitInput[i]);
 							}
 						}
 
 					}
-
+					
+					//courseArray contains all of the course objects that were inputed
 					ArrayList<Course> courseArray = new ArrayList<Course>();
+					
+					// loops through and adds each course to the 
 					for (int n = 0; n < courseCodes.size(); n++) {
 						courseArray.add(new Course(courseCodes.get(n), courseName.get(n), teacherName.get(n),
 								classroom.get(n), primaryDay.get(n), secondaryDay.get(n), primaryTime.get(n),
@@ -128,10 +132,11 @@ public class Main extends Application {
 
 					}
 
-					for (int j = 0; j < courseArray.size(); j++) {
-						System.out.println(courseArray.get(j).displayClass());
-						
-					}
+					// test to see if courses are displaying correct information
+//					for (int j = 0; j < courseArray.size(); j++) {
+//						System.out.println(courseArray.get(j).displayClass());
+//					}
+					
 
 					// adds days of the week to the calendar
 					Text monday = new Text("		Monday		");
@@ -260,13 +265,14 @@ public class Main extends Application {
 			return secondaryDay;
 		}
 
-		private String SecondaryTime() {
+		private String getSecondaryTime() {
 			return secondaryTime;
 		}
 
 		private String displayClass() {
 
 			String output = "";
+			//creates a course string based off the course elements that were passed in the constructor for each course
 			for(int k=0; k<courseInfo.size();k++) {
 				if(!(courseInfo.get(k).equals("") || courseInfo.get(k).equals(" "))) {
 					output+=courseInfo.get(k)+"\n";
