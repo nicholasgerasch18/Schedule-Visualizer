@@ -44,8 +44,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 
-			// gives the window a header and creates the BorderPane which we will be working
-			// with
+			// gives the window a header and creates the BorderPane
+			// which we will be working with
 			primaryStage.setTitle("Schedule Visualizer!!");
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 400, 400);
@@ -81,7 +81,7 @@ public class Main extends Application {
 					// initiates lists for the included variables to be displayed on the calendar
 					ArrayList<String> courseCodes = new ArrayList<String>();
 					ArrayList<String> courseName = new ArrayList<String>();
-					ArrayList<String> teacherName = new ArrayList<String>();
+					ArrayList<String> professorName = new ArrayList<String>();
 					ArrayList<String> classroom = new ArrayList<String>();
 					ArrayList<String> primaryDay = new ArrayList<String>();
 					ArrayList<String> secondaryDay = new ArrayList<String>();
@@ -92,46 +92,57 @@ public class Main extends Application {
 					String input = textArea.getText();
 					// splits submitted text into array and splits it at each new line
 					String[] splitInput = input.split("\n");
-					
-					//unused variables, will delete if code runs smoothly
-//					int length = splitInput.length;
-//					int size = ((splitInput.length) / COLUMN_NUM);
-//					int count = 1;
-//					int count2 = 1;
-					
-					//
+
+					// parses through each line of text
 					for (int i = 0; i < splitInput.length; i++) {
 						String current = splitInput[i];
 						String[] currentsplit = current.split("-");
+						// checks if line contains a course code. If so, it knows it's a new class
+						// and then adds course code and name to their respective lists
 						if (COURSE_CODES.contains(currentsplit[0])) {
 							courseCodes.add(splitInput[i]);
 							courseName.add(splitInput[i + 1]);
 
-							teacherName.add(" ");
+							// creates a placeholder for the other lists
+							professorName.add(" ");
 							primaryDay.add(" ");
 							primaryTime.add(" ");
 							secondaryDay.add(" ");
 							secondaryTime.add(" ");
 							classroom.add(" ");
 
+							// checks if line is professor name
 						} else if (current.contains(",")) {
-							teacherName.add(courseCodes.size() - 1, current);
+							professorName.add(courseCodes.size() - 1, current);
+
+							// checks if line is building code
 						} else if (BUILDING_NAMES.contains(current)) {
 							classroom.add(courseCodes.size() - 1, splitInput[i] + " " + splitInput[i + 1]);
+
+							// checks if line is the days of class
 						} else if (DAYS.contains(current)) {
+
+							// checks if the primary days for this class is empty still,
+							// if so, we add the days to primary days list
 							if (primaryDay.get(courseCodes.size() - 1).equals(" ")) {
-								// need to work on parsing second day
-								// primaryDay.add(splitInput[i]);
 								primaryDay.add(courseCodes.size() - 1, splitInput[i]);
 
+								// if it is not empty, then these days are secondary days and
+								// are added to the respective list
 							} else {
 								secondaryDay.add(courseCodes.size() - 1, splitInput[i]);
-
 							}
+
+							// checks if line is a time frame
 						} else if (current.contains(":")) {
+
+							// checks if the primary time for this class is empty still,
+							// if so, we add the time to primary times list
 							if (primaryTime.get(courseCodes.size() - 1).equals(" ")) {
 								primaryTime.add(courseCodes.size() - 1, splitInput[i]);
 
+								// if it is not empty, then this time frame is a secondary time and
+								// is added to the respective list
 							} else {
 								secondaryTime.add(courseCodes.size() - 1, splitInput[i]);
 							}
@@ -139,12 +150,14 @@ public class Main extends Application {
 
 					}
 
-					// courseArray contains all of the course objects that were inputed
+					// initiates courseArray which contains all of the course
+					// objects that were inputed
 					ArrayList<Course> courseArray = new ArrayList<Course>();
 
-					// loops through and adds each course to the
+					// loops through and adds each course to the courseArray by accessing each
+					// array. Each index is a separate class
 					for (int n = 0; n < courseCodes.size(); n++) {
-						courseArray.add(new Course(courseCodes.get(n), courseName.get(n), teacherName.get(n),
+						courseArray.add(new Course(courseCodes.get(n), courseName.get(n), professorName.get(n),
 								classroom.get(n), primaryDay.get(n), secondaryDay.get(n), primaryTime.get(n),
 								secondaryTime.get(n)));
 
@@ -155,6 +168,7 @@ public class Main extends Application {
 						System.out.println(courseArray.get(j).displayClass());
 					}
 
+					// initiates a calendar
 					CalendarInterface calendar = new CalendarGenerator(root);
 					calendar.addDays(root);
 					calendar.addHorizontalLines(root);
@@ -171,76 +185,6 @@ public class Main extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	private class Course {
-
-		private String courseCode;
-		private String courseName;
-		private String teacherName;
-		private String classroom;
-		private String primaryDay;
-		private String primaryTime;
-		private String secondaryDay;
-		private String secondaryTime;
-		private ArrayList<String> courseInfo;
-
-		public Course(String courseCode, String courseName, String teacherName, String classroom, String primaryDay,
-				String secondaryDay, String primaryTime, String secondaryTime) {
-			this.courseCode = courseCode;
-			this.courseName = courseName;
-			this.teacherName = teacherName;
-			this.classroom = classroom;
-			this.primaryDay = primaryDay;
-			this.primaryTime = primaryTime;
-			this.secondaryDay = secondaryDay;
-			this.secondaryTime = secondaryTime;
-			courseInfo = new ArrayList<String>(Arrays.asList(classroom, teacherName, courseCode, courseName, primaryDay,
-					primaryTime, secondaryDay, secondaryTime));
-		}
-
-		private String getCourseCode() {
-			return courseCode;
-		}
-
-		private String getteacherName() {
-			return teacherName;
-		}
-
-		private String getClassroom() {
-			return classroom;
-		}
-
-		private String getPrimaryDay() {
-			return primaryDay;
-		}
-
-		private String getPrimaryTime() {
-			return primaryTime;
-		}
-
-		private String getSecondaryDay() {
-			return secondaryDay;
-		}
-
-		private String getSecondaryTime() {
-			return secondaryTime;
-		}
-
-		private String displayClass() {
-
-			String output = "";
-			// creates a course string based off the course elements that were passed in the
-			// constructor for each course
-			for (int k = 0; k < courseInfo.size(); k++) {
-				if (!(courseInfo.get(k).equals("") || courseInfo.get(k).equals(" "))) {
-					output += courseInfo.get(k) + "\n";
-
-				}
-			}
-			return output;
-		}
-
 	}
 
 	public static void main(String[] args) {
