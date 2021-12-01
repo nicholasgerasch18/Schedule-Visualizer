@@ -19,4 +19,12 @@ public interface CourseInterface {
 	public String getSecondaryTime();
 
 	public String displayClass();
+	
+	public String getPrimaryStartTime();
+	
+	public String getPrimaryEndTime();
+	
+	public String getSecondaryStartTime();
+	
+	public String getSecondaryEndTime();
 }

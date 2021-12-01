@@ -11,8 +11,12 @@ public class Course implements CourseInterface {
 	private String classroom;
 	private String primaryDay;
 	private String primaryTime;
+	private String primaryStartTime;
+	private String primaryEndTime;
 	private String secondaryDay;
 	private String secondaryTime;
+	private String secondaryStartTime;
+	private String secondaryEndTime;
 	private ArrayList<String> courseInfo;
 
 	/**
@@ -28,16 +32,29 @@ public class Course implements CourseInterface {
 	 * @param primaryTime   - the primary time frame for the Course
 	 * @param secondaryTime - the secondary time frame for the Course
 	 */
-	public Course(String courseCode, String courseName, String teacherName, String classroom, String primaryDay,
-			String secondaryDay, String primaryTime, String secondaryTime) {
+	public Course(String courseCode, String courseName, String teacherName, String classroom, String primaryDay,String secondaryDay, String primaryTime, String secondaryTime) {
 		this.courseCode = courseCode;
 		this.courseName = courseName;
 		this.professorName = teacherName;
 		this.classroom = classroom;
 		this.primaryDay = primaryDay;
 		this.primaryTime = primaryTime;
+		if(!secondaryTime.equals(" ")) {
+			String[] primaryTimeArray = primaryTime.split("-");
+			primaryStartTime = primaryTimeArray[0].trim();
+			primaryEndTime = primaryTimeArray[1].trim();
+		}
+		
+		
 		this.secondaryDay = secondaryDay;
 		this.secondaryTime = secondaryTime;
+		if(!secondaryTime.equals(" ")) {
+			String[] secondaryTimeArray = secondaryTime.split("-");
+			secondaryStartTime = secondaryTimeArray[0].trim();
+			secondaryEndTime = secondaryTimeArray[1].trim();
+		}
+		
+		
 		courseInfo = new ArrayList<String>(Arrays.asList(classroom, teacherName, courseCode, courseName, primaryDay,
 				primaryTime, secondaryDay, secondaryTime));
 	}
@@ -47,6 +64,7 @@ public class Course implements CourseInterface {
 	 * 
 	 * returns - the course code (String)
 	 */
+	@Override
 	public String getCourseCode() {
 		return courseCode;
 	}
@@ -56,6 +74,7 @@ public class Course implements CourseInterface {
 	 * 
 	 * returns - the course name (String)
 	 */
+	@Override
 	public String getCourseName() {
 		return courseName;
 	}
@@ -65,6 +84,7 @@ public class Course implements CourseInterface {
 	 * 
 	 * returns - the professor's name (String)
 	 */
+	@Override
 	public String getteacherName() {
 		return professorName;
 	}
@@ -75,6 +95,7 @@ public class Course implements CourseInterface {
 	 * 
 	 * returns - the classroom's building and number/name (String)
 	 */
+	@Override
 	public String getClassroom() {
 		return classroom;
 	}
@@ -84,6 +105,7 @@ public class Course implements CourseInterface {
 	 * 
 	 * returns - the primary days (String)
 	 */
+	@Override
 	public String getPrimaryDay() {
 		return primaryDay;
 	}
@@ -93,6 +115,7 @@ public class Course implements CourseInterface {
 	 * 
 	 * returns - the primary time frame (String)
 	 */
+	@Override
 	public String getPrimaryTime() {
 		return primaryTime;
 	}
@@ -102,6 +125,7 @@ public class Course implements CourseInterface {
 	 * 
 	 * returns - the secondary days (String)
 	 */
+	@Override
 	public String getSecondaryDay() {
 		return secondaryDay;
 	}
@@ -111,6 +135,7 @@ public class Course implements CourseInterface {
 	 * 
 	 * returns - the secondary time frame (String)
 	 */
+	@Override
 	public String getSecondaryTime() {
 		return secondaryTime;
 	}
@@ -120,6 +145,7 @@ public class Course implements CourseInterface {
 	 * 
 	 * returns - Course as a String (String)
 	 */
+	@Override
 	public String displayClass() {
 
 		String output = "";
@@ -130,6 +156,30 @@ public class Course implements CourseInterface {
 			}
 		}
 		return output;
+	}
+
+	@Override
+	public String getPrimaryStartTime() {
+		// TODO Auto-generated method stub
+		return primaryStartTime;
+	}
+
+	@Override
+	public String getPrimaryEndTime() {
+		// TODO Auto-generated method stub
+		return primaryEndTime;
+	}
+
+	@Override
+	public String getSecondaryStartTime() {
+		// TODO Auto-generated method stub
+		return secondaryStartTime;
+	}
+
+	@Override
+	public String getSecondaryEndTime() {
+		// TODO Auto-generated method stub
+		return secondaryEndTime;
 	}
 
 }
