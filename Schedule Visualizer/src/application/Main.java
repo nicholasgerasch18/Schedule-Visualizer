@@ -22,7 +22,9 @@ import javafx.scene.text.Text;
 
 public class Main extends Application {
 
+	// current max number of categories for one class input
 	final int COLUMN_NUM = 12;
+	// all known course codes
 	final ArrayList<String> COURSE_CODES = new ArrayList<String>(Arrays.asList("ACCT", "AFSP", "APMA", "ARHI", "ART",
 			"ASIA", "ASTR", "AUGIE", "BIOL", "BUSN", "CHEM", "CHNS", "CHST", "CLAS", "COMM", "CORE", "CSC", "CSD",
 			"DATA", "ECON", "EDMU", "EDUC", "ENCW", "ENGL", "ENGR", "ENTM", "ENVR", "FOOD", "FREN", "FRST", "FYH",
@@ -30,16 +32,20 @@ public class Main extends Application {
 			"KINS", "LATN", "LING", "LSC", "LTAM", "MATH", "MJMC", "MSCI", "MUCH", "MUEN", "MUSC", "MULS", "NTGR",
 			"PHIL", "PHYS", "POLS", "PSYC", "PUBH", "RELG", "SCAN", "SLP", "SOAN", "SPAN", "SPRI", "SPST", "SWED",
 			"THEA", "WGSS", "WLIT", "WLCC"));
+	// all known building codes
 	final ArrayList<String> BUILDING_NAMES = new ArrayList<String>(
 			Arrays.asList("ABST", "AND", "ANNX", "ARPO", "ARTS", "BERG", "BROD", "BRUN", "CARH", "CARV", "DENK", "EVLD",
 					"JDPL", "LIBR", "LIND", "OLDM", "OLIN", "SCIE", "SORN", "SWEN"));
+	// all known times for classes
 	final ArrayList<String> DAYS = new ArrayList<String>(Arrays.asList("M ", "Tu ", "W ", "Th ", "F ", "M W F ",
 			"Tu Th ", "M W ", "M F ", "W F ", "Tu W Th F ", "M Tu W Th F "));
 
 	@Override
-	public void start(Stage primaryStage){
+	public void start(Stage primaryStage) {
 		try {
 
+			// gives the window a header and creates the BorderPane which we will be working
+			// with
 			primaryStage.setTitle("Schedule Visualizer!!");
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 400, 400);
@@ -50,10 +56,12 @@ public class Main extends Application {
 			root.setAlignment(scheduleVisualizer, Pos.TOP_CENTER);
 			root.setTop(scheduleVisualizer);
 
+			// creates text area
 			TextArea textArea = new TextArea();
 			root.setMargin(textArea, new Insets(20));
 			root.setCenter(textArea);
 
+			// creates submit button
 			Button submit = new Button("Submit");
 			root.setAlignment(submit, Pos.BOTTOM_CENTER);
 			root.setMargin(submit, new Insets(10));
@@ -63,12 +71,14 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
+			// initiates action of parsing code once the submit button is clicked
 			submit.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent e) {
 					Group root = new Group();
 					Scene scene = new Scene(root, 800, 900);
 					Stage stage = new Stage();
 
+					// initiates lists for the included variables to be displayed on the calendar
 					ArrayList<String> courseCodes = new ArrayList<String>();
 					ArrayList<String> courseName = new ArrayList<String>();
 					ArrayList<String> teacherName = new ArrayList<String>();
@@ -78,12 +88,18 @@ public class Main extends Application {
 					ArrayList<String> primaryTime = new ArrayList<String>();
 					ArrayList<String> secondaryTime = new ArrayList<String>();
 
+					// gets text submitted
 					String input = textArea.getText();
+					// splits submitted text into array and splits it at each new line
 					String[] splitInput = input.split("\n");
-					int length = splitInput.length;
-					int size = ((splitInput.length) / COLUMN_NUM);
-					int count = 1;
-					int count2 = 1;
+					
+					//unused variables, will delete if code runs smoothly
+//					int length = splitInput.length;
+//					int size = ((splitInput.length) / COLUMN_NUM);
+//					int count = 1;
+//					int count2 = 1;
+					
+					//
 					for (int i = 0; i < splitInput.length; i++) {
 						String current = splitInput[i];
 						String[] currentsplit = current.split("-");
@@ -138,14 +154,13 @@ public class Main extends Application {
 					for (int j = 0; j < courseArray.size(); j++) {
 						System.out.println(courseArray.get(j).displayClass());
 					}
-					
-					
+
 					CalendarInterface calendar = new CalendarGenerator(root);
 					calendar.addDays(root);
 					calendar.addHorizontalLines(root);
 					calendar.addVerticalLines(root);
 					calendar.addHorizontalLines(root);
-				
+
 					stage.setTitle("New Visualized Schedule!!");
 					stage.setScene(scene);
 					stage.show();
@@ -157,8 +172,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	private class Course {
 
 		private String courseCode;
