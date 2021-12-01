@@ -33,7 +33,9 @@ public class Course implements CourseInterface{
 		public String getCourseCode() {
 			return courseCode;
 		}
-
+		public String getCourseName() {
+			return courseName;
+		}
 		public String getteacherName() {
 			return teacherName;
 		}

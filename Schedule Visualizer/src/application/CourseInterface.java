@@ -1,5 +1,5 @@
 package application;
-
+//test
 public interface CourseInterface {
 	public String getCourseCode();
 	public String getCourseName();

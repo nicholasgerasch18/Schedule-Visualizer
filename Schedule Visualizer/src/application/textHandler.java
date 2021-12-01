@@ -27,7 +27,7 @@ public class textHandler {
 	private ArrayList<String> primaryTime = new ArrayList<String>();
 	private ArrayList<String> secondaryTime = new ArrayList<String>();
 	private ArrayList<Course> courseArray = new ArrayList<Course>();
-	
+	//test
 	public textHandler(String input) {
 		String[] splitInput = input.split("\n");
 		for (int i = 0; i < splitInput.length; i++) {
