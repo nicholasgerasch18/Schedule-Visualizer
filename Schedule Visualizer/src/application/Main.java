@@ -21,10 +21,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Main extends Application {
+
 	@Override
-	public void start(Stage primaryStage){
+	public void start(Stage primaryStage) {
 		try {
 
+			// gives the window a header and creates the BorderPane
+			// which we will be working with
 			primaryStage.setTitle("Schedule Visualizer!!");
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root, 400, 400);
@@ -32,9 +35,13 @@ public class Main extends Application {
 			Text scheduleVisualizer = new Text("Augustana Schedule Visualizer!");
 			root.setAlignment(scheduleVisualizer, Pos.TOP_CENTER);
 			root.setTop(scheduleVisualizer);
+
+			// creates text area
 			TextArea textArea = new TextArea();
 			root.setMargin(textArea, new Insets(20));
 			root.setCenter(textArea);
+
+			// creates submit button
 			Button submit = new Button("Submit");
 			root.setAlignment(submit, Pos.BOTTOM_CENTER);
 			root.setMargin(submit, new Insets(10));
@@ -43,23 +50,29 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
-			
-
+			// initiates action of parsing code once the submit button is clicked
 			submit.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent e) {
 					Group root = new Group();
 					Scene scene = new Scene(root, 800, 900);
 					Stage stage = new Stage();
+
+					// gets text submitted
 					String input = textArea.getText();
 					textHandler handledText = new textHandler(input);
-					ArrayList<Course> courseArray = new ArrayList<Course>();
+					ArrayList<Course> courseArray = new ArrayList<>();
 					courseArray = handledText.getCourses();
 					
+					for(int i = 0; i<courseArray.size();i++) {
+						System.out.println(courseArray.get(i).displayClass());
+					}
+
 					CalendarInterface calendar = new CalendarGenerator(root);
 					calendar.addDays(root);
 					calendar.addHorizontalLines(root);
 					calendar.addVerticalLines(root);
 					calendar.addHorizontalLines(root);
+
 					stage.setTitle("New Visualized Schedule!!");
 					stage.setScene(scene);
 					stage.show();
@@ -71,8 +84,6 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
-	
 
 	public static void main(String[] args) {
 		launch(args);

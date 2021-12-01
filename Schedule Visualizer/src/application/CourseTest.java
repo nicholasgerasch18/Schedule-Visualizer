@@ -1,14 +1,15 @@
 package application;
+
 //test
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
 class CourseTest {
-	
-	private Course testCourse = new Course("BIOL-362-01", "Human Physiology", "Gehler, Scott R.", "SCIE 102", "M W F ", "", "12:00PM - 1:15PM", "");
-	
-	
+
+	private Course testCourse = new Course("BIOL-362-01", "Human Physiology", "Gehler, Scott R.", "SCIE 102", "M W F ",
+			"", "12:00PM - 1:15PM", "");
+
 	@Test
 	public void test() {
 		assertEquals("BIOL-362-01", testCourse.getCourseCode());
@@ -21,7 +22,5 @@ class CourseTest {
 		assertEquals("", testCourse.getSecondaryTime());
 
 	}
-	
-	
-	
+
 }
