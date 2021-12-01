@@ -2,6 +2,7 @@ package application;
 
 public interface CourseInterface {
 	public String getCourseCode();
+	public String getCourseName();
 	public String getteacherName(); 
 	public String getClassroom();
 	public String getPrimaryDay(); 
