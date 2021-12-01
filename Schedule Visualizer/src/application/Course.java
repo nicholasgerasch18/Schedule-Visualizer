@@ -32,29 +32,28 @@ public class Course implements CourseInterface {
 	 * @param primaryTime   - the primary time frame for the Course
 	 * @param secondaryTime - the secondary time frame for the Course
 	 */
-	public Course(String courseCode, String courseName, String teacherName, String classroom, String primaryDay,String secondaryDay, String primaryTime, String secondaryTime) {
+	public Course(String courseCode, String courseName, String teacherName, String classroom, String primaryDay,
+			String secondaryDay, String primaryTime, String secondaryTime) {
 		this.courseCode = courseCode;
 		this.courseName = courseName;
 		this.professorName = teacherName;
 		this.classroom = classroom;
 		this.primaryDay = primaryDay;
 		this.primaryTime = primaryTime;
-		if(!secondaryTime.equals(" ")) {
+		if (!secondaryTime.equals(" ")) {
 			String[] primaryTimeArray = primaryTime.split("-");
 			primaryStartTime = primaryTimeArray[0].trim();
 			primaryEndTime = primaryTimeArray[1].trim();
 		}
-		
-		
+
 		this.secondaryDay = secondaryDay;
 		this.secondaryTime = secondaryTime;
-		if(!secondaryTime.equals(" ")) {
+		if (!secondaryTime.equals(" ")) {
 			String[] secondaryTimeArray = secondaryTime.split("-");
 			secondaryStartTime = secondaryTimeArray[0].trim();
 			secondaryEndTime = secondaryTimeArray[1].trim();
 		}
-		
-		
+
 		courseInfo = new ArrayList<String>(Arrays.asList(classroom, teacherName, courseCode, courseName, primaryDay,
 				primaryTime, secondaryDay, secondaryTime));
 	}
@@ -121,6 +120,28 @@ public class Course implements CourseInterface {
 	}
 
 	/**
+	 * accesses the primary start time of the Course
+	 * 
+	 * returns - the primary start time (String)
+	 */
+	@Override
+	public String getPrimaryStartTime() {
+
+		return primaryStartTime;
+	}
+
+	/**
+	 * accesses the primary end time of the Course
+	 * 
+	 * returns - the primary end time (String)
+	 */
+	@Override
+	public String getPrimaryEndTime() {
+
+		return primaryEndTime;
+	}
+
+	/**
 	 * accesses the secondary days of the Course
 	 * 
 	 * returns - the secondary days (String)
@@ -141,6 +162,28 @@ public class Course implements CourseInterface {
 	}
 
 	/**
+	 * accesses the secondary start time of the Course
+	 * 
+	 * returns - the secondary start time (String)
+	 */
+	@Override
+	public String getSecondaryStartTime() {
+
+		return secondaryStartTime;
+	}
+
+	/**
+	 * accesses the secondary end time of the Course
+	 * 
+	 * returns - the secondary end time (String)
+	 */
+	@Override
+	public String getSecondaryEndTime() {
+
+		return secondaryEndTime;
+	}
+
+	/**
 	 * displays the Course as a String with its attributes
 	 * 
 	 * returns - Course as a String (String)
@@ -156,30 +199,6 @@ public class Course implements CourseInterface {
 			}
 		}
 		return output;
-	}
-
-	@Override
-	public String getPrimaryStartTime() {
-		// TODO Auto-generated method stub
-		return primaryStartTime;
-	}
-
-	@Override
-	public String getPrimaryEndTime() {
-		// TODO Auto-generated method stub
-		return primaryEndTime;
-	}
-
-	@Override
-	public String getSecondaryStartTime() {
-		// TODO Auto-generated method stub
-		return secondaryStartTime;
-	}
-
-	@Override
-	public String getSecondaryEndTime() {
-		// TODO Auto-generated method stub
-		return secondaryEndTime;
 	}
 
 }
