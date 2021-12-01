@@ -40,7 +40,7 @@ public class Course implements CourseInterface {
 		this.classroom = classroom;
 		this.primaryDay = primaryDay;
 		this.primaryTime = primaryTime;
-		if (!secondaryTime.equals(" ")) {
+		if (!primaryTime.equals(" ")) {
 			String[] primaryTimeArray = primaryTime.split("-");
 			primaryStartTime = primaryTimeArray[0].trim();
 			primaryEndTime = primaryTimeArray[1].trim();
@@ -49,7 +49,7 @@ public class Course implements CourseInterface {
 		this.secondaryDay = secondaryDay;
 		this.secondaryTime = secondaryTime;
 		if (!secondaryTime.equals(" ")) {
-			String[] secondaryTimeArray = secondaryTime.split("-");
+			String[] secondaryTimeArray = secondaryTime.split(" - ");
 			secondaryStartTime = secondaryTimeArray[0].trim();
 			secondaryEndTime = secondaryTimeArray[1].trim();
 		}

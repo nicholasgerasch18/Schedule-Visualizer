@@ -13,9 +13,6 @@ public class CalendarGenerator implements CalendarInterface {
 	public Group root;
 	public HashMap<String, Integer> coordinateDictionary = new HashMap<>(100);
 
-	public String[] timeArray = { "8:00AM", "9:00AM", "10:00AM", "11:00AM", "12:00PM", "1:00PM", "2:00PM", "3:00PM",
-			
-			"4:00PM", "5:00PM", "6:00PM", "7:00PM", "8:00PM", "9:00PM", "10:00PM" };
 	
 	private ArrayList<Integer> xCoordinates = new ArrayList<>(); 
 	private ArrayList<Integer> yCoordinates = new ArrayList<>(); 
@@ -31,9 +28,6 @@ public class CalendarGenerator implements CalendarInterface {
 		addVerticalLines(root);
 		makeCoordinateDictionary();
 		
-		System.out.println(coordinateDictionary);
-		System.out.println(xCoordinates);
-		System.out.println(yCoordinates);
 
 	}
 
@@ -56,6 +50,10 @@ public class CalendarGenerator implements CalendarInterface {
 
 	public void addTimestamps(Group root) {
 		
+		String[] timeArray = { "8:00AM", "9:00AM", "10:00AM", "11:00AM", "12:00PM", "1:00PM", "2:00PM", "3:00PM",
+				
+				"4:00PM", "5:00PM", "6:00PM", "7:00PM", "8:00PM", "9:00PM", "10:00PM" };
+
 		int x = 10;
 		int y = 40;
 
@@ -118,14 +116,18 @@ public class CalendarGenerator implements CalendarInterface {
 	 */
 	private void makeCoordinateDictionary() {
 		ArrayList<String> daysOfWeek = new ArrayList<String>(Arrays.asList("M", "Tu", "W", "Th", "F"));
+		ArrayList<String> times = new ArrayList<>(Arrays.asList( "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM",
+				
+				"4PM", "5PM", "6PM", "7PM", "8PM", "9PM", "10PM" ));
+
 		
 		for (int g = 0; g < 5; g++) {
 			coordinateDictionary.put(daysOfWeek.get(g), xCoordinates.get(g));
 		}
 		for (int g = 0; g < 15; g++) {
-			coordinateDictionary.put(timeArray[g], yCoordinates.get(g));
+			coordinateDictionary.put(times.get(g), yCoordinates.get(g));
 		}
-
+		System.out.println(coordinateDictionary);
 	}
 	
 	public HashMap<String, Integer> getCoordinateDictionary(){
