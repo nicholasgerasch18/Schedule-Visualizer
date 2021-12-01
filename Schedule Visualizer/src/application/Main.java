@@ -2,6 +2,8 @@ package application;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -66,13 +68,14 @@ public class Main extends Application {
 					for(int i = 0; i<courseArray.size();i++) {
 						System.out.println(courseArray.get(i).displayClass());
 					}
-
-					CalendarInterface calendar = new CalendarGenerator(root);
-					calendar.addDays(root);
-					calendar.addHorizontalLines(root);
-					calendar.addVerticalLines(root);
-					calendar.addHorizontalLines(root);
-
+					
+					//creates calendar
+					CalendarGenerator calendar = new CalendarGenerator(root);					
+					calendar.getCalendar();
+					
+//					makeCourseBoxes(courseArray, calendar.getCoordinateDictionary());
+					
+					
 					stage.setTitle("New Visualized Schedule!!");
 					stage.setScene(scene);
 					stage.show();
@@ -85,7 +88,17 @@ public class Main extends Application {
 		}
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+//	public static void makeCourseBoxes(ArrayList<Course> courseArray, HashMap<String, Integer> coordinateDictionary) {
+//		
+//		for(Course course : courseArray ) {
+//			String courseName = course.getCourseName();
+//			String courseCode = course.getCourseCode();
+//			
+//			String endTime =
+//			String startTime
+//		}
+//		
+//		Rectangle courseBox = new Rectangle();
+//		
+//	}
 }
