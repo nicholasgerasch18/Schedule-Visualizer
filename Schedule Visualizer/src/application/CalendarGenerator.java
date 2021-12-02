@@ -130,7 +130,7 @@ public class CalendarGenerator implements CalendarInterface {
 		for (int g = 0; g < 15; g++) {
 			coordinateDictionary.put(times.get(g), yCoordinates.get(g));
 		}
-		System.out.println(coordinateDictionary);
+		//System.out.println(coordinateDictionary);
 	}
 	
 	public HashMap<String, Integer> getCoordinateDictionary(){
