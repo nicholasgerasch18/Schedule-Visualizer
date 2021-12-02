@@ -26,7 +26,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class Main extends Application {
+public class ScheduleVisualizer extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
