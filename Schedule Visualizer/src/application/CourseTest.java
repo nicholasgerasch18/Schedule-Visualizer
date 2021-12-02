@@ -40,7 +40,7 @@ class CourseTest {
 
 	}
 	
-	
+	//hi
 	@Test
 	public void noDaysCourseTest() {
 		assertEquals("CORE-INTR-BT", noDaysCourse.getCourseCode());
