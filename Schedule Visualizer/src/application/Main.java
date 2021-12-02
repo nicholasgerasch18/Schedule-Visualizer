@@ -121,6 +121,11 @@ public class Main extends Application {
 //			System.out.println(primaryDays);
 //			System.out.println(Integer.parseInt(getChars(0, 1, startTimeSplit[1], 0)));
 			String info = courseCode + " " + courseName + "\n" + startTime + " - " +  endTime;
+			Random rn = new Random();
+			int num = rn.nextInt(255) + 1;
+			int num2 = rn.nextInt(255) + 1;
+			int num3 = rn.nextInt(255) + 1;
+			Color color = Color.rgb(num,num2,num3);
 			for (String day : primaryDays) {
 				Label label = new Label();
 				label.setWrapText(true);
@@ -135,7 +140,7 @@ public class Main extends Application {
 				label.setMaxHeight((coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1]))
 						- (coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5) - 5);
 				label.setBackground(new Background(
-						new BackgroundFill(Color.rgb(100,100,100), new CornerRadii(5.0), new Insets(0))));
+						new BackgroundFill(color, new CornerRadii(5.0), new Insets(0))));
 				root.getChildren().add(label);
 //				Rectangle rectangle = new Rectangle();
 //				rectangle.setX(coordinateDictionary.get(day) - 24);
