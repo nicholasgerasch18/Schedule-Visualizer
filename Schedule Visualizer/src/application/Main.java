@@ -101,18 +101,19 @@ public class Main extends Application {
 		for (Course course : courseArray) {
 			String courseName = course.getCourseName();
 			String courseCode = course.getCourseCode();
-			String startTime = course.getPrimaryStartTime();
-			String endTime = course.getPrimaryEndTime();
+			if (course.hasTime()) {
+				String startTime = course.getPrimaryStartTime();
+				String endTime = course.getPrimaryEndTime();
 
-			String[] startTimeSplit = startTime.split(":");
-			String[] endTimeSplit = endTime.split(":");
+				String[] startTimeSplit = startTime.split(":");
+				String[] endTimeSplit = endTime.split(":");
 
-			startTimeSplit[0] = startTimeSplit[0] + startTimeSplit[1].substring(2, 4);
-			startTimeSplit[1] = startTimeSplit[1].substring(0, 2);
-			endTimeSplit[0] = endTimeSplit[0] + endTimeSplit[1].substring(2, 4);
-			endTimeSplit[1] = endTimeSplit[1].substring(0, 2);
+				startTimeSplit[0] = startTimeSplit[0] + startTimeSplit[1].substring(2, 4);
+				startTimeSplit[1] = startTimeSplit[1].substring(0, 2);
+				endTimeSplit[0] = endTimeSplit[0] + endTimeSplit[1].substring(2, 4);
+				endTimeSplit[1] = endTimeSplit[1].substring(0, 2);
 
-			String[] primaryDays = course.getPrimaryDay().split(" ");
+				String[] primaryDays = course.getPrimaryDay().split(" ");
 //			if(course.getSecondaryDay() != null) {
 //				String[] secondaryDays = course.getPrimaryDay().split(" ");
 //
@@ -120,28 +121,30 @@ public class Main extends Application {
 
 //			System.out.println(primaryDays);
 //			System.out.println(Integer.parseInt(getChars(0, 1, startTimeSplit[1], 0)));
-			String info = courseCode + " " + courseName + "\n" + startTime + " - " +  endTime;
-			Random rn = new Random();
-			int num = rn.nextInt(255) + 1;
-			int num2 = rn.nextInt(255) + 1;
-			int num3 = rn.nextInt(255) + 1;
-			Color color = Color.rgb(num,num2,num3);
-			for (String day : primaryDays) {
-				Label label = new Label();
-				label.setWrapText(true);
-				label.setText(info);
-				label.setTranslateX(coordinateDictionary.get(day) - 24);
-				label.setTranslateY(
-						coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5);
-				label.setMinWidth(98);
-				label.setMaxWidth(98);
-				label.setMinHeight((coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1]))
-						- (coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5) - 5);
-				label.setMaxHeight((coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1]))
-						- (coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5) - 5);
-				label.setBackground(new Background(
-						new BackgroundFill(color, new CornerRadii(5.0), new Insets(0))));
-				root.getChildren().add(label);
+				String info = courseCode + " " + courseName + "\n" + startTime + " - " + endTime;
+
+				Random rn = new Random();
+				int num = rn.nextInt(255) + 1;
+				int num2 = rn.nextInt(255) + 1;
+				int num3 = rn.nextInt(255) + 1;
+				Color color = Color.rgb(num, num2, num3);
+				for (String day : primaryDays) {
+					Label label = new Label();
+					label.setWrapText(true);
+					label.setText(info);
+					label.setTranslateX(coordinateDictionary.get(day) - 24);
+					label.setTranslateY(
+							coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5);
+					label.setMinWidth(98);
+					label.setMaxWidth(98);
+					label.setMinHeight((coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1]))
+							- (coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5)
+							- 5);
+					label.setMaxHeight((coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1]))
+							- (coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5)
+							- 5);
+					label.setBackground(new Background(new BackgroundFill(color, new CornerRadii(5.0), new Insets(0))));
+					root.getChildren().add(label);
 //				Rectangle rectangle = new Rectangle();
 //				rectangle.setX(coordinateDictionary.get(day) - 24);
 //				rectangle.setY(coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5);
@@ -150,6 +153,7 @@ public class Main extends Application {
 //				rectangle.setHeight((coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1])) - rectangle.getY() - 5);
 //				rectangle.setFill(Color.rgb(100, 100, 100));
 //				root.getChildren().add(rectangle);
+				}
 			}
 		}
 

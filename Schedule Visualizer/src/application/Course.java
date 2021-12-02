@@ -200,5 +200,13 @@ public class Course implements CourseInterface {
 		}
 		return output;
 	}
+	/**
+	 * Checks to see if time is determined by instructor
+	 */
+	@Override
+	public boolean hasTime() {
+		if (!primaryDay.equals(" ")) return true;
+		return false;
+	}
 
 }
