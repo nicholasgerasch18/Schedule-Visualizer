@@ -27,4 +27,6 @@ public interface CourseInterface {
 	public String getSecondaryStartTime();
 	
 	public String getSecondaryEndTime();
+	
+	public boolean hasTime();
 }
