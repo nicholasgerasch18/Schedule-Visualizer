@@ -65,7 +65,7 @@ public class ScheduleVisualizer extends Application {
 
 					// gets text submitted
 					String input = textArea.getText();
-					textHandler handledText = new textHandler(input);
+					TextHandler handledText = new TextHandler(input);
 					ArrayList<Course> courseArray = new ArrayList<>();
 					courseArray = handledText.getCourses();
 					

@@ -3,7 +3,7 @@ package application;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class textHandler {
+public class TextHandler {
 	// all known course codes
 	final ArrayList<String> COURSE_CODES = new ArrayList<String>(Arrays.asList("ACCT", "AFSP", "APMA", "ARHI", "ART",
 			"ASIA", "ASTR", "AUGIE", "BIOL", "BUSN", "CHEM", "CHNS", "CHST", "CLAS", "COMM", "CORE", "CSC", "CSD",
@@ -33,7 +33,7 @@ public class textHandler {
 	// objects that were inputed
 	private ArrayList<Course> courseArray = new ArrayList<Course>();
 
-	public textHandler(String input) {
+	public TextHandler(String input) {
 		// splits submitted text into array and splits it at each new line
 		String[] splitInput = input.split("\n");
 		// parses through each line of text
