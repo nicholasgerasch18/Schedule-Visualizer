@@ -3,8 +3,11 @@ package application;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
+
 import javafx.scene.Group;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -12,7 +15,7 @@ public class CalendarGenerator implements CalendarInterface {
 
 	public Group root;
 	public HashMap<String, Integer> coordinateDictionary = new HashMap<>(100);
-
+	public HashMap<Rectangle, String> courseBoxDictionary = new HashMap(15);
 	
 	private ArrayList<Integer> xCoordinates = new ArrayList<>(); 
 	private ArrayList<Integer> yCoordinates = new ArrayList<>(); 
@@ -133,4 +136,58 @@ public class CalendarGenerator implements CalendarInterface {
 	public HashMap<String, Integer> getCoordinateDictionary(){
 		return coordinateDictionary;
 	}
-}
+	
+	public void createBoxDictionary(Rectangle courseBox, int xCoord, int yCoord, double height) {
+		
+		String value = Integer.toString(xCoord) + " " + Integer.toString(yCoord) + " " + Double.toString(height);
+		courseBoxDictionary.put(courseBox, value);
+	}
+	
+	public boolean checkOverLap() {
+		boolean overlapping = false;
+		ArrayList<String> rectangleSpecsAsString = new ArrayList<>();
+		ArrayList<Integer> xCoordList = new ArrayList<>();
+		ArrayList<Integer> minYCoordList = new ArrayList<>();
+		ArrayList<Double> maxYCoordList = new ArrayList<>();
+		
+		for( Rectangle rectangle : courseBoxDictionary.keySet()) {
+			rectangleSpecsAsString.add(courseBoxDictionary.get(rectangle));
+		}
+		
+		for(int i = 0 ; i < rectangleSpecsAsString.size(); i++) {
+			String specString = rectangleSpecsAsString.get(i);
+			String[] specArray = specString.split(" ");
+			xCoordList.add(Integer.parseInt(specArray[0]));
+			minYCoordList.add(Integer.parseInt(specArray[1]));
+			maxYCoordList.add(Double.parseDouble(specArray[2]));
+		}
+		
+		
+		for(int i = 0; i < xCoordList.size(); i++) {
+			if(xCoordList.contains(xCoordList.get(i))){
+				for(int k = 0; k < xCoordList.size(); k++) {
+					if(xCoordList.get(i) == xCoordList.get(k)) {
+						for(int j = 0; j < xCoordList.size(); j++) {
+							if(minYCoordList.get(i) > minYCoordList.get(j) &&  minYCoordList.get(i) < maxYCoordList.get(j)) {
+								overlapping = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return overlapping;
+	}
+}	
+
+
+
+
+
+
+
+
+
+
+

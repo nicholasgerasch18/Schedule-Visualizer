@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -17,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -68,7 +70,7 @@ public class Main extends Application {
 					courseArray = handledText.getCourses();
 					
 					for(int i = 0; i<courseArray.size();i++) {
-						System.out.println(courseArray.get(i).displayClass());
+						System.out.println(courseArray.get(i).toString());
 					}
 					
 					//creates calendar
@@ -76,7 +78,7 @@ public class Main extends Application {
 					calendar.getCalendar();
 					HashMap<String, Integer> dictionary = calendar.getCoordinateDictionary();
 					
-					makeCourseBoxes(courseArray , dictionary, root);
+					makeCourseBoxes(courseArray , dictionary, root, calendar);
 					
 					
 					stage.setTitle("New Visualized Schedule!!");
@@ -91,54 +93,108 @@ public class Main extends Application {
 		}
 	}
 
-	public static void makeCourseBoxes(ArrayList<Course> courseArray, HashMap<String, Integer> coordinateDictionary, Group root) {
+	public static void makeCourseBoxes(ArrayList<Course> courseArray, HashMap<String, Integer> coordinateDictionary, Group root, CalendarGenerator calendar) {
 
 		for(Course course : courseArray) {
-			String courseName = course.getCourseName();
-			String courseCode = course.getCourseCode();
 			String startTime = course.getPrimaryStartTime();
 			String endTime = course.getPrimaryEndTime();
-
-			
 			String[] startTimeSplit = startTime.split(":");
 			String[] endTimeSplit = endTime.split(":");
-
 			startTimeSplit[0] = startTimeSplit[0] + startTimeSplit[1].substring(2,4);
 			startTimeSplit[1] = startTimeSplit[1].substring(0,2);
 			endTimeSplit[0] = endTimeSplit[0] + endTimeSplit[1].substring(2,4);
 			endTimeSplit[1] = endTimeSplit[1].substring(0,2);
-
-			
-			
 			String[] primaryDays = course.getPrimaryDay().split(" ");
-//			if(course.getSecondaryDay() != null) {
-//				String[] secondaryDays = course.getPrimaryDay().split(" ");
-//
-//			}
 			
-//			System.out.println(primaryDays);
-//			System.out.println(Integer.parseInt(getChars(0, 1, startTimeSplit[1], 0)));
-			for(String day : primaryDays) {
+			Random rn = new Random();
+			int num = rn.nextInt(255) + 1;
+			int num2 = rn.nextInt(255) + 1;
+			int num3 = rn.nextInt(255) + 1;
+			Color color = Color.rgb(num,num2,num3);
+			
+			if(course.getSecondaryDay() != " ") {
+				System.out.println(course.getSecondaryTime());
+				String secondaryStartTime = course.getSecondaryStartTime();
+				String secondaryEndTime = course.getSecondaryEndTime();
+				String[] secondaryStartTimeSplit = secondaryStartTime.split(":");
+				String[] secondaryEndTimeSplit = secondaryEndTime.split(":");
+				secondaryStartTimeSplit[0] = secondaryStartTimeSplit[0] + secondaryStartTimeSplit[1].substring(2,4);
+				secondaryStartTimeSplit[1] = secondaryStartTimeSplit[1].substring(0,2);
+				secondaryEndTimeSplit[0] = secondaryEndTimeSplit[0] + secondaryEndTimeSplit[1].substring(2,4);
+				secondaryEndTimeSplit[1] = secondaryEndTimeSplit[1].substring(0,2);
+				String[] SecondaryDays = course.getSecondaryDay().split(" ");
 				
-				Rectangle rectangle = new Rectangle();
-				rectangle.setX(coordinateDictionary.get(day) - 24);
-				rectangle.setY(coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5);
-				rectangle.setWidth(98);
-				System.out.println(coordinateDictionary.get(startTimeSplit[0]));
-				rectangle.setHeight((coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1])) - rectangle.getY() - 5);
-				rectangle.setFill(Color.rgb(100, 100, 100));
-				root.getChildren().add(rectangle);
+				for(String day : SecondaryDays) {
+					int xCoord = coordinateDictionary.get(day) - 24;
+					int yCoord = coordinateDictionary.get(secondaryStartTimeSplit[0]) + Integer.parseInt(secondaryStartTimeSplit[1]) - 5;
+					Rectangle rectangle = new Rectangle();
+					rectangle.setX(xCoord);
+					rectangle.setY(yCoord);
+					rectangle.setWidth(98);
+					double height = (coordinateDictionary.get(secondaryEndTimeSplit[0]) + Integer.parseInt(secondaryEndTimeSplit[1])) - rectangle.getY() - 5;
+					rectangle.setHeight(height);
+					rectangle.setArcWidth(30.0); 
+					rectangle.setArcHeight(20.0);  
+					rectangle.setFill(color);
+
+					Label text = new Label(course.toString("secondary"));
+					text.setMaxWidth(85);
+					text.setWrapText(true);
+					text.setTranslateX(rectangle.getX() + 10);
+					text.setTranslateY(rectangle.getY() + 10);
+					text.setFont(Font.font("Verdana", 10));
+					root.getChildren().add(rectangle);
+					root.getChildren().add(text);
+					calendar.createBoxDictionary(rectangle, xCoord, yCoord, height);
+
+				}
 			}
+		
+			
+			for(String day : primaryDays) {
+				Rectangle rectangle = new Rectangle();
+
+				int xCoord1 = coordinateDictionary.get(day) - 24;
+				int yCoord1 = coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5;
+				rectangle.setX(xCoord1);
+				rectangle.setY(yCoord1);
+				rectangle.setWidth(98);
+					
+				double height1 = (coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1])) - rectangle.getY() - 5;
+				rectangle.setHeight(height1);
+				rectangle.setArcWidth(30.0); 
+				rectangle.setArcHeight(20.0);  
+				rectangle.setFill(color);
+	
+				Label text = new Label(course.toString("primary"));
+				text.setMaxWidth(85);
+				text.setWrapText(true);
+				text.setTranslateX(rectangle.getX() + 10);
+				text.setTranslateY(rectangle.getY() + 10);
+				text.setFont(Font.font("Verdana", 10));
+				root.getChildren().add(rectangle);
+				root.getChildren().add(text);
+					
+				calendar.createBoxDictionary(rectangle, xCoord1, yCoord1, height1);
+				
+			}
+			
+			if(calendar.checkOverLap()) {
+				Label overlapWarning = new Label("You have conflicting class times in your schedule!");
+				overlapWarning.setTranslateX(150);
+				overlapWarning.setTranslateY(950);
+				overlapWarning.setFont(Font.font("Verdana", 10));
+
+				root.getChildren().add(overlapWarning);
+				System.out.println(overlapWarning + "hi");
+
+			}
+			
+			
 		}
 		
 		
 	}
 
-	private static String getChars(int i, int j, String string, int k) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-//	public void checkOverLap(){
-//}
 }

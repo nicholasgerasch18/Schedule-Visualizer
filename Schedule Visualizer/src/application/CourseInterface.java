@@ -18,7 +18,7 @@ public interface CourseInterface {
 
 	public String getSecondaryTime();
 
-	public String displayClass();
+	public String toString(String dayDescription);
 	
 	public String getPrimaryStartTime();
 	

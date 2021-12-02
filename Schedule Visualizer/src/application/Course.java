@@ -189,16 +189,15 @@ public class Course implements CourseInterface {
 	 * returns - Course as a String (String)
 	 */
 	@Override
-	public String displayClass() {
-
-		String output = "";
-		for (int k = 0; k < courseInfo.size(); k++) {
-			if (!(courseInfo.get(k).equals("") || courseInfo.get(k).equals(" "))) {
-				output += courseInfo.get(k) + "\n";
-
-			}
+	public String toString(String whichDay) {
+		String courseDisplay = "";
+		if (whichDay.equals("secondary")) {
+			 courseDisplay = courseCode + " " + courseName + " \n" + secondaryTime;
+		}else {
+			courseDisplay = courseCode + " " + courseName + " \n" + primaryTime;
 		}
-		return output;
+		return courseDisplay;
+				
 	}
 
 }
