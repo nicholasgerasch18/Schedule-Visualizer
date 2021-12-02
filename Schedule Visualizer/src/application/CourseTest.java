@@ -13,8 +13,7 @@ class CourseTest {
 	private Course secondaryTimeCourse = new Course("MUEN-209-NC", "Symphonic Band", "Lambrecht, James M", "BERG ER", "M W F ",
 			"Tu Th ", "4:30PM - 5:30PM", "4:15PM - 5:30PM");
 	
-	private Course noDaysCourse = new Course("CORE-INTR-BT", "Core Internship", "Tidball, Roberta", " ", " ",
-			" ", " ", " ");
+	private Course noDaysCourse = new Course("CORE-INTR-BT", "Core Internship", "Tidball, Roberta", " ", " ", " ", " ", " ");
 	@Test
 	public void normalCourseTest() {
 		assertEquals("BIOL-362-01", normalCourse.getCourseCode());
@@ -48,7 +47,7 @@ class CourseTest {
 		assertEquals("Core Internship", noDaysCourse.getCourseName());
 		assertEquals("Tidball, Roberta", noDaysCourse.getteacherName());
 		assertEquals(" ", noDaysCourse.getClassroom());
-		assertEquals(" ", noDaysCourse.getPrimaryDay());
+		assertEquals("M", noDaysCourse.getPrimaryDay());
 		assertEquals(" ", noDaysCourse.getPrimaryTime());
 		assertEquals(" ", noDaysCourse.getSecondaryDay());
 		assertEquals(" ", noDaysCourse.getSecondaryTime());
