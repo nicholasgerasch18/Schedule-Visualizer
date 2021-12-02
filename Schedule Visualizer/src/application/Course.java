@@ -39,11 +39,18 @@ public class Course implements CourseInterface {
 		this.professorName = teacherName;
 		this.classroom = classroom;
 		this.primaryDay = primaryDay;
+		if(primaryDay.equals(" ")) {
+			this.primaryDay = "M"; 
+		}
 		this.primaryTime = primaryTime;
 		if (!primaryTime.equals(" ")) {
 			String[] primaryTimeArray = primaryTime.split("-");
 			primaryStartTime = primaryTimeArray[0].trim();
 			primaryEndTime = primaryTimeArray[1].trim();
+		}else {
+			this.primaryStartTime = "9:00PM";
+			this.primaryEndTime="10:00PM";
+			System.out.println("afgddagfgfadgfdgdf");
 		}
 
 		this.secondaryDay = secondaryDay;
