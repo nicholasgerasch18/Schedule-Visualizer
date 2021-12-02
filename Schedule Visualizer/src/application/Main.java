@@ -3,6 +3,8 @@ package application;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 import javafx.application.Application;
@@ -16,7 +18,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -66,19 +71,18 @@ public class Main extends Application {
 					textHandler handledText = new textHandler(input);
 					ArrayList<Course> courseArray = new ArrayList<>();
 					courseArray = handledText.getCourses();
-					
-					for(int i = 0; i<courseArray.size();i++) {
+
+					for (int i = 0; i < courseArray.size(); i++) {
 						System.out.println(courseArray.get(i).displayClass());
 					}
-					
-					//creates calendar
-					CalendarGenerator calendar = new CalendarGenerator(root);					
+
+					// creates calendar
+					CalendarGenerator calendar = new CalendarGenerator(root);
 					calendar.getCalendar();
 					HashMap<String, Integer> dictionary = calendar.getCoordinateDictionary();
-					
-					makeCourseBoxes(courseArray , dictionary, root);
-					
-					
+
+					makeCourseBoxes(courseArray, dictionary, root);
+
 					stage.setTitle("New Visualized Schedule!!");
 					stage.setScene(scene);
 					stage.show();
@@ -91,54 +95,66 @@ public class Main extends Application {
 		}
 	}
 
-	public static void makeCourseBoxes(ArrayList<Course> courseArray, HashMap<String, Integer> coordinateDictionary, Group root) {
+	public static void makeCourseBoxes(ArrayList<Course> courseArray, HashMap<String, Integer> coordinateDictionary,
+			Group root) {
 
-		for(Course course : courseArray) {
+		for (Course course : courseArray) {
 			String courseName = course.getCourseName();
 			String courseCode = course.getCourseCode();
 			String startTime = course.getPrimaryStartTime();
 			String endTime = course.getPrimaryEndTime();
 
-			
 			String[] startTimeSplit = startTime.split(":");
 			String[] endTimeSplit = endTime.split(":");
 
-			startTimeSplit[0] = startTimeSplit[0] + startTimeSplit[1].substring(2,4);
-			startTimeSplit[1] = startTimeSplit[1].substring(0,2);
-			endTimeSplit[0] = endTimeSplit[0] + endTimeSplit[1].substring(2,4);
-			endTimeSplit[1] = endTimeSplit[1].substring(0,2);
+			startTimeSplit[0] = startTimeSplit[0] + startTimeSplit[1].substring(2, 4);
+			startTimeSplit[1] = startTimeSplit[1].substring(0, 2);
+			endTimeSplit[0] = endTimeSplit[0] + endTimeSplit[1].substring(2, 4);
+			endTimeSplit[1] = endTimeSplit[1].substring(0, 2);
 
-			
-			
 			String[] primaryDays = course.getPrimaryDay().split(" ");
 //			if(course.getSecondaryDay() != null) {
 //				String[] secondaryDays = course.getPrimaryDay().split(" ");
 //
 //			}
-			
+
 //			System.out.println(primaryDays);
 //			System.out.println(Integer.parseInt(getChars(0, 1, startTimeSplit[1], 0)));
-			for(String day : primaryDays) {
-				
-				Rectangle rectangle = new Rectangle();
-				rectangle.setX(coordinateDictionary.get(day) - 24);
-				rectangle.setY(coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5);
-				rectangle.setWidth(98);
-				System.out.println(coordinateDictionary.get(startTimeSplit[0]));
-				rectangle.setHeight((coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1])) - rectangle.getY() - 5);
-				rectangle.setFill(Color.rgb(100, 100, 100));
-				root.getChildren().add(rectangle);
+			String info = courseCode + " " + courseName + "\n" + startTime + " - " +  endTime;
+			for (String day : primaryDays) {
+				Label label = new Label();
+				label.setWrapText(true);
+				label.setText(info);
+				label.setTranslateX(coordinateDictionary.get(day) - 24);
+				label.setTranslateY(
+						coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5);
+				label.setMinWidth(98);
+				label.setMaxWidth(98);
+				label.setMinHeight((coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1]))
+						- (coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5) - 5);
+				label.setMaxHeight((coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1]))
+						- (coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5) - 5);
+				label.setBackground(new Background(
+						new BackgroundFill(Color.rgb(100,100,100), new CornerRadii(5.0), new Insets(0))));
+				root.getChildren().add(label);
+//				Rectangle rectangle = new Rectangle();
+//				rectangle.setX(coordinateDictionary.get(day) - 24);
+//				rectangle.setY(coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5);
+//				rectangle.setWidth(98);
+//				System.out.println(coordinateDictionary.get(startTimeSplit[0]));
+//				rectangle.setHeight((coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1])) - rectangle.getY() - 5);
+//				rectangle.setFill(Color.rgb(100, 100, 100));
+//				root.getChildren().add(rectangle);
 			}
 		}
-		
-		
+
 	}
 
 	private static String getChars(int i, int j, String string, int k) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 //	public void checkOverLap(){
 //}
 }
