@@ -17,6 +17,7 @@ public class Course implements CourseInterface {
 	private String secondaryTime;
 	private String secondaryStartTime;
 	private String secondaryEndTime;
+	private Boolean isConflicting;
 	private ArrayList<String> courseInfo;
 
 	/**
@@ -39,6 +40,7 @@ public class Course implements CourseInterface {
 		this.professorName = teacherName;
 		this.classroom = classroom;
 		this.primaryDay = primaryDay;
+		isConflicting = false;
 		if(primaryDay.equals(" ")) {
 			this.primaryDay = "M"; 
 		}
@@ -50,7 +52,7 @@ public class Course implements CourseInterface {
 		}else {
 			this.primaryStartTime = "9:00PM";
 			this.primaryEndTime="10:00PM";
-			System.out.println("afgddagfgfadgfdgdf");
+			//System.out.println("afgddagfgfadgfdgdf");
 		}
 
 		this.secondaryDay = secondaryDay;
@@ -213,6 +215,40 @@ public class Course implements CourseInterface {
 	public boolean hasTime() {
 		if (!primaryDay.equals(" ")) return true;
 		return false;
+	}
+
+	@Override
+	public int primaryMilitaryStart(String Time) {
+		// TODO Auto-generated method stub
+		int time=0;
+		String[] primaryStartTimeSplit = Time.split(":");
+		//String[] primaryEndTimeSplit = primaryEndTime.split(":");
+		if(primaryStartTimeSplit[1].substring(2,4).equals("PM")) {
+			time+=1200;
+		}
+		if( Integer.parseInt(primaryStartTimeSplit[0])!=12) {
+			time+= Integer.parseInt(primaryStartTimeSplit[0]) * 100;
+		}
+		time+=  Integer.parseInt(primaryStartTimeSplit[1].substring(0,2));
+		return time;
+	}
+
+	@Override
+	public int primaryMilitaryEnd() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setConflicting(Boolean conflict) {
+		isConflicting = conflict;
+		
+	}
+
+	@Override
+	public Boolean isConflicting() {
+		// TODO Auto-generated method stub
+		return isConflicting;
 	}
 
 }

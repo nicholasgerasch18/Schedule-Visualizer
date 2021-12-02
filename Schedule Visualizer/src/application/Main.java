@@ -69,8 +69,25 @@ public class Main extends Application {
 					ArrayList<Course> courseArray = new ArrayList<>();
 					courseArray = handledText.getCourses();
 					
+					
+					for(int x=0; x<courseArray.size()-1;x++) {
+						for(int y=0; y<courseArray.size();y++) {
+							System.out.print(courseArray.get(y).primaryMilitaryStart(courseArray.get(y).getPrimaryStartTime()));
+							int start1 = courseArray.get(x).primaryMilitaryStart(courseArray.get(x).getPrimaryStartTime());
+							int end1 =courseArray.get(x).primaryMilitaryStart(courseArray.get(x).getPrimaryEndTime());
+							int start2 = courseArray.get(y).primaryMilitaryStart(courseArray.get(y).getPrimaryStartTime());
+							
+							if( start2>start1 && start2 < end1 && !courseArray.get(x).equals(courseArray.get(y)) ) {
+								courseArray.get(x).setConflicting(true);
+								courseArray.get(y).setConflicting(true);
+							}
+						}
+					}
+					
+					
+					
 					for(int i = 0; i<courseArray.size();i++) {
-						System.out.println(courseArray.get(i).toString());
+						System.out.println(courseArray.get(i).isConflicting());
 					}
 					
 					//creates calendar
@@ -96,6 +113,7 @@ public class Main extends Application {
 	public static void makeCourseBoxes(ArrayList<Course> courseArray, HashMap<String, Integer> coordinateDictionary, Group root, CalendarGenerator calendar) {
 
 		for(Course course : courseArray) {
+			
 			String startTime = course.getPrimaryStartTime();
 			String endTime = course.getPrimaryEndTime();
 			String[] startTimeSplit = startTime.split(":");
@@ -113,7 +131,7 @@ public class Main extends Application {
 			Color color = Color.rgb(num,num2,num3);
 			
 			if(course.getSecondaryDay() != " ") {
-				System.out.println(course.getSecondaryTime());
+				//System.out.println(course.getSecondaryTime());
 				String secondaryStartTime = course.getSecondaryStartTime();
 				String secondaryEndTime = course.getSecondaryEndTime();
 				String[] secondaryStartTimeSplit = secondaryStartTime.split(":");
@@ -179,16 +197,16 @@ public class Main extends Application {
 				
 			}
 			
-			if(calendar.checkOverLap()) {
-				Label overlapWarning = new Label("You have conflicting class times in your schedule!");
-				overlapWarning.setTranslateX(150);
-				overlapWarning.setTranslateY(950);
-				overlapWarning.setFont(Font.font("Verdana", 10));
-
-				root.getChildren().add(overlapWarning);
-				System.out.println(overlapWarning + "hi");
-
-			}
+//			if(calendar.checkOverLap()) {
+//				Label overlapWarning = new Label("You have conflicting class times in your schedule!");
+//				overlapWarning.setTranslateX(150);
+//				overlapWarning.setTranslateY(950);
+//				overlapWarning.setFont(Font.font("Verdana", 10));
+//
+//				root.getChildren().add(overlapWarning);
+//				//System.out.println(overlapWarning + "hi");
+//
+//			}
 			
 			
 		}

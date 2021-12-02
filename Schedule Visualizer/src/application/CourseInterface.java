@@ -29,4 +29,13 @@ public interface CourseInterface {
 	public String getSecondaryEndTime();
 	
 	public boolean hasTime();
+	
+	public int primaryMilitaryStart(String Time);
+	
+	public int primaryMilitaryEnd();
+	
+	public void setConflicting(Boolean conflict);
+	
+	public Boolean isConflicting();
+	
 }
