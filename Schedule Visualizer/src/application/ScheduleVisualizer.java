@@ -70,25 +70,39 @@ public class ScheduleVisualizer extends Application {
 					courseArray = handledText.getCourses();
 					
 					
+					
+					
+					//checking if times overlap
 					for(int x=0; x<courseArray.size()-1;x++) {
+						
 						for(int y=0; y<courseArray.size();y++) {
-							System.out.print(courseArray.get(y).primaryMilitaryStart(courseArray.get(y).getPrimaryStartTime()));
+					
 							int start1 = courseArray.get(x).primaryMilitaryStart(courseArray.get(x).getPrimaryStartTime());
 							int end1 =courseArray.get(x).primaryMilitaryStart(courseArray.get(x).getPrimaryEndTime());
 							int start2 = courseArray.get(y).primaryMilitaryStart(courseArray.get(y).getPrimaryStartTime());
+							int end2 =courseArray.get(y).primaryMilitaryStart(courseArray.get(y).getPrimaryEndTime());
+							Boolean sameDay = false;
 							
-							if( start2>start1 && start2 < end1 && !courseArray.get(x).equals(courseArray.get(y)) ) {
+							for(int i = 0; i<courseArray.get(x).getPrimaryDayList().size(); i++) {
+						
+								if(courseArray.get(y).getPrimaryDayList().contains(courseArray.get(x).getPrimaryDayList().get(i)) && !courseArray.get(x).equals(courseArray.get(y))) {
+									sameDay = true;
+								}
+							}
+					
+							if( (start2>start1 && start2 < end1 && !courseArray.get(x).equals(courseArray.get(y)) && sameDay) || start2<start1 && start1 < end2 && !courseArray.get(x).equals(courseArray.get(y)) && sameDay) {
 								courseArray.get(x).setConflicting(true);
 								courseArray.get(y).setConflicting(true);
+								courseArray.get(x).setColor(Color.RED);
+								courseArray.get(y).setColor(Color.RED);
+								System.out.print("hello");
 							}
 						}
 					}
 					
 					
 					
-					for(int i = 0; i<courseArray.size();i++) {
-						System.out.println(courseArray.get(i).isConflicting());
-					}
+		
 					
 					//creates calendar
 					CalendarGenerator calendar = new CalendarGenerator(root);					
@@ -124,11 +138,7 @@ public class ScheduleVisualizer extends Application {
 			endTimeSplit[1] = endTimeSplit[1].substring(0,2);
 			String[] primaryDays = course.getPrimaryDay().split(" ");
 			
-			Random rn = new Random();
-			int num = rn.nextInt(255) + 1;
-			int num2 = rn.nextInt(255) + 1;
-			int num3 = rn.nextInt(255) + 1;
-			Color color = Color.rgb(num,num2,num3);
+			
 			
 			if(course.getSecondaryDay() != " ") {
 				//System.out.println(course.getSecondaryTime());
@@ -153,7 +163,7 @@ public class ScheduleVisualizer extends Application {
 					rectangle.setHeight(height);
 					rectangle.setArcWidth(30.0); 
 					rectangle.setArcHeight(20.0);  
-					rectangle.setFill(color);
+					rectangle.setFill(course.getColor());
 
 					Label text = new Label(course.toString("secondary"));
 					text.setMaxWidth(85);
@@ -182,7 +192,7 @@ public class ScheduleVisualizer extends Application {
 				rectangle.setHeight(height1);
 				rectangle.setArcWidth(30.0); 
 				rectangle.setArcHeight(20.0);  
-				rectangle.setFill(color);
+				rectangle.setFill(course.getColor());
 	
 				Label text = new Label(course.toString("primary"));
 				text.setMaxWidth(85);

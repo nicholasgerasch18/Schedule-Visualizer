@@ -1,5 +1,9 @@
 package application;
 
+import java.util.ArrayList;
+
+import javafx.scene.paint.Color;
+
 //test
 public interface CourseInterface {
 	public String getCourseCode();
@@ -38,4 +42,11 @@ public interface CourseInterface {
 	
 	public Boolean isConflicting();
 	
+	public Color getColor();
+	
+	public void setColor(Color newColor);
+	
+	public ArrayList<String> getPrimaryDayList();
+	
+	public ArrayList<String> getSecondaryDayList();
 }

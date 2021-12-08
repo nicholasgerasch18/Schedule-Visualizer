@@ -2,6 +2,9 @@ package application;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
+
+import javafx.scene.paint.Color;
 
 public class Course implements CourseInterface {
 
@@ -19,7 +22,11 @@ public class Course implements CourseInterface {
 	private String secondaryEndTime;
 	private Boolean isConflicting;
 	private ArrayList<String> courseInfo;
+	private Color courseColor;
 
+	private ArrayList<String> primaryDayList;
+	private ArrayList<String> secondaryDayList;
+	
 	/**
 	 * creates a course object based on the inputed info
 	 * 
@@ -40,9 +47,18 @@ public class Course implements CourseInterface {
 		this.professorName = teacherName;
 		this.classroom = classroom;
 		this.primaryDay = primaryDay;
+		primaryDayList = new ArrayList<String>();
+		secondaryDayList = new ArrayList<String>();
 		isConflicting = false;
+		
+		//problematic
 		if(primaryDay.equals(" ")) {
 			this.primaryDay = "M"; 
+		}
+		
+		String[] primaryDaySplit = primaryDay.split(" ");
+		for(int i = 0; i<primaryDaySplit.length; i++) {
+			primaryDayList.add(primaryDaySplit[i]);
 		}
 		this.primaryTime = primaryTime;
 		if (!primaryTime.equals(" ")) {
@@ -52,7 +68,7 @@ public class Course implements CourseInterface {
 		}else {
 			this.primaryStartTime = "9:00PM";
 			this.primaryEndTime="10:00PM";
-			//System.out.println("afgddagfgfadgfdgdf");
+			
 		}
 
 		this.secondaryDay = secondaryDay;
@@ -61,8 +77,25 @@ public class Course implements CourseInterface {
 			String[] secondaryTimeArray = secondaryTime.split(" - ");
 			secondaryStartTime = secondaryTimeArray[0].trim();
 			secondaryEndTime = secondaryTimeArray[1].trim();
+			String[] secondaryDaySplit = secondaryDay.split(" ");
+			for(int x = 0; x<secondaryDaySplit.length; x++) {
+				secondaryDayList.add(secondaryDaySplit[x]);
+			}
 		}
-
+		
+		
+		Random rn = new Random();
+		int num = rn.nextInt(255) + 1;
+		int num2 = rn.nextInt(255) + 1;
+		int num3 = rn.nextInt(255) + 1;
+		Color color = Color.rgb(num,num2,num3);
+		
+		courseColor = color;
+		
+		
+		
+		
+		
 		courseInfo = new ArrayList<String>(Arrays.asList(classroom, teacherName, courseCode, courseName, primaryDay,
 				primaryTime, secondaryDay, secondaryTime));
 	}
@@ -249,6 +282,30 @@ public class Course implements CourseInterface {
 	public Boolean isConflicting() {
 		// TODO Auto-generated method stub
 		return isConflicting;
+	}
+
+	@Override
+	public Color getColor() {
+		// TODO Auto-generated method stub
+		return courseColor;
+	}
+
+	@Override
+	public void setColor(Color newColor) {
+		// TODO Auto-generated method stub
+		courseColor = newColor;
+	}
+
+	@Override
+	public ArrayList<String> getPrimaryDayList() {
+		// TODO Auto-generated method stub
+		return primaryDayList;
+	}
+
+	@Override
+	public ArrayList<String> getSecondaryDayList() {
+		// TODO Auto-generated method stub
+		return secondaryDayList;
 	}
 
 }
