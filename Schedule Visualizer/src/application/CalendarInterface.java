@@ -2,6 +2,11 @@ package application;
 
 import javafx.scene.Group;
 
+/**
+ * 
+ * @author Gabriel Vallejo
+ *
+ */
 public interface CalendarInterface {
 	public void addDays(Group root);
 

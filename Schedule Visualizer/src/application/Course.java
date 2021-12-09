@@ -24,9 +24,8 @@ public class Course implements CourseInterface {
 	private String secondaryStartTime;
 	private String secondaryEndTime;
 	private Boolean isConflicting;
-	private ArrayList<String> courseInfo;
 	private Color courseColor;
-
+	private ArrayList<String> courseInfo;
 	private ArrayList<String> primaryDayList;
 	private ArrayList<String> secondaryDayList;
 
@@ -94,7 +93,7 @@ public class Course implements CourseInterface {
 
 		courseColor = color;
 
-		courseInfo = new ArrayList<String>(Arrays.asList(classroom, teacherName, courseCode, courseName, primaryDay,
+		new ArrayList<String>(Arrays.asList(classroom, teacherName, courseCode, courseName, primaryDay,
 				primaryTime, secondaryDay, secondaryTime));
 	}
 
@@ -311,33 +310,34 @@ public class Course implements CourseInterface {
 		int end1;
 		int start2;
 		int end2;
-		if(primaryCourse.equals("secondary")) {
+		if (primaryCourse.equals("secondary")) {
 			start1 = primaryMilitaryStart(secondaryStartTime);
 			end1 = primaryMilitaryStart(secondaryEndTime);
 			dayList = this.secondaryDayList;
-		}else {
+		} else {
 			start1 = primaryMilitaryStart(primaryStartTime);
 			end1 = primaryMilitaryStart(primaryEndTime);
 			dayList = this.primaryDayList;
 		}
-		
-		if(secondaryCourse.equals("secondary")) {
+
+		if (secondaryCourse.equals("secondary")) {
 			start2 = second.primaryMilitaryStart(second.getSecondaryStartTime());
-			end2 =second.primaryMilitaryStart(second.getSecondaryEndTime());
+			end2 = second.primaryMilitaryStart(second.getSecondaryEndTime());
 			dayList2 = second.getSecondaryDayList();
-		}else {
+		} else {
 			start2 = second.primaryMilitaryStart(second.getPrimaryStartTime());
-			end2 =second.primaryMilitaryStart(second.getPrimaryEndTime());
+			end2 = second.primaryMilitaryStart(second.getPrimaryEndTime());
 			dayList2 = second.getPrimaryDayList();
 		}
-		
+
 		Boolean sameDay = false;
-		for(int i = 0; i<dayList.size(); i++) {
-			if(dayList2.contains(dayList.get(i)) && !this.equals(second)) {
+		for (int i = 0; i < dayList.size(); i++) {
+			if (dayList2.contains(dayList.get(i)) && !this.equals(second)) {
 				sameDay = true;
 			}
 		}
-		if( (start2>start1 && start2 < end1 && !this.equals(second) && sameDay) || start2<start1 && start1 < end2 && !this.equals(second) && sameDay) {
+		if ((start2 > start1 && start2 < end1 && !this.equals(second) && sameDay)
+				|| start2 < start1 && start1 < end2 && !this.equals(second) && sameDay) {
 			this.setConflicting(true);
 			second.setConflicting(true);
 			this.setColor(Color.RED);
@@ -356,5 +356,6 @@ public class Course implements CourseInterface {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }
