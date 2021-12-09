@@ -55,7 +55,7 @@ public class CalendarGenerator implements CalendarInterface {
 		
 		String[] timeArray = { "8:00AM", "9:00AM", "10:00AM", "11:00AM", "12:00PM", "1:00PM", "2:00PM", "3:00PM",
 				
-				"4:00PM", "5:00PM", "6:00PM", "7:00PM", "8:00PM", "9:00PM", "10:00PM" };
+				"4:00PM", "5:00PM", "6:00PM", "7:00PM", "8:00PM", "9:00PM", "10:00PM", "Other \nCourses: " };
 
 		int x = 10;
 		int y = 40;
@@ -143,42 +143,42 @@ public class CalendarGenerator implements CalendarInterface {
 		courseBoxDictionary.put(courseBox, value);
 	}
 	
-	public boolean checkOverLap() {
-		boolean overlapping = false;
-		ArrayList<String> rectangleSpecsAsString = new ArrayList<>();
-		ArrayList<Integer> xCoordList = new ArrayList<>();
-		ArrayList<Integer> minYCoordList = new ArrayList<>();
-		ArrayList<Double> maxYCoordList = new ArrayList<>();
-		
-		for( Rectangle rectangle : courseBoxDictionary.keySet()) {
-			rectangleSpecsAsString.add(courseBoxDictionary.get(rectangle));
-		}
-		
-		for(int i = 0 ; i < rectangleSpecsAsString.size(); i++) {
-			String specString = rectangleSpecsAsString.get(i);
-			String[] specArray = specString.split(" ");
-			xCoordList.add(Integer.parseInt(specArray[0]));
-			minYCoordList.add(Integer.parseInt(specArray[1]));
-			maxYCoordList.add(Double.parseDouble(specArray[2]));
-		}
-		
-		
-		for(int i = 0; i < xCoordList.size(); i++) {
-			if(xCoordList.contains(xCoordList.get(i))){
-				for(int k = 0; k < xCoordList.size(); k++) {
-					if(xCoordList.get(i) == xCoordList.get(k)) {
-						for(int j = 0; j < xCoordList.size(); j++) {
-							if(minYCoordList.get(i) > minYCoordList.get(j) &&  minYCoordList.get(i) < maxYCoordList.get(j)) {
-								overlapping = true;
-							}
-						}
-					}
-				}
-			}
-		}
-		
-		return overlapping;
-	}
+//	public boolean checkOverLap() {
+//		boolean overlapping = false;
+//		ArrayList<String> rectangleSpecsAsString = new ArrayList<>();
+//		ArrayList<Integer> xCoordList = new ArrayList<>();
+//		ArrayList<Integer> minYCoordList = new ArrayList<>();
+//		ArrayList<Double> maxYCoordList = new ArrayList<>();
+//		
+//		for( Rectangle rectangle : courseBoxDictionary.keySet()) {
+//			rectangleSpecsAsString.add(courseBoxDictionary.get(rectangle));
+//		}
+//		
+//		for(int i = 0 ; i < rectangleSpecsAsString.size(); i++) {
+//			String specString = rectangleSpecsAsString.get(i);
+//			String[] specArray = specString.split(" ");
+//			xCoordList.add(Integer.parseInt(specArray[0]));
+//			minYCoordList.add(Integer.parseInt(specArray[1]));
+//			maxYCoordList.add(Double.parseDouble(specArray[2]));
+//		}
+//		
+//		
+//		for(int i = 0; i < xCoordList.size(); i++) {
+//			if(xCoordList.contains(xCoordList.get(i))){
+//				for(int k = 0; k < xCoordList.size(); k++) {
+//					if(xCoordList.get(i) == xCoordList.get(k)) {
+//						for(int j = 0; j < xCoordList.size(); j++) {
+//							if(minYCoordList.get(i) > minYCoordList.get(j) &&  minYCoordList.get(i) < maxYCoordList.get(j)) {
+//								overlapping = true;
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+//		
+//		return overlapping;
+//	}
 }	
 
 

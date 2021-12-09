@@ -27,7 +27,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class ScheduleVisualizer extends Application {
-
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -60,7 +60,7 @@ public class ScheduleVisualizer extends Application {
 			submit.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent e) {
 					Group root = new Group();
-					Scene scene = new Scene(root, 800, 900);
+					Scene scene = new Scene(root, 800, 1000);
 					Stage stage = new Stage();
 
 					// gets text submitted
@@ -76,27 +76,39 @@ public class ScheduleVisualizer extends Application {
 					for(int x=0; x<courseArray.size()-1;x++) {
 						
 						for(int y=0; y<courseArray.size();y++) {
-					
-							int start1 = courseArray.get(x).primaryMilitaryStart(courseArray.get(x).getPrimaryStartTime());
-							int end1 =courseArray.get(x).primaryMilitaryStart(courseArray.get(x).getPrimaryEndTime());
-							int start2 = courseArray.get(y).primaryMilitaryStart(courseArray.get(y).getPrimaryStartTime());
-							int end2 =courseArray.get(y).primaryMilitaryStart(courseArray.get(y).getPrimaryEndTime());
-							Boolean sameDay = false;
 							
-							for(int i = 0; i<courseArray.get(x).getPrimaryDayList().size(); i++) {
-						
-								if(courseArray.get(y).getPrimaryDayList().contains(courseArray.get(x).getPrimaryDayList().get(i)) && !courseArray.get(x).equals(courseArray.get(y))) {
-									sameDay = true;
-								}
+							
+							courseArray.get(x).checkOverlap(courseArray.get(y),"primary","primary");
+							if(!courseArray.get(x).getSecondaryDay().equals(" ")) {
+								courseArray.get(x).checkOverlap(courseArray.get(y),"secondary","primary");
 							}
-					
-							if( (start2>start1 && start2 < end1 && !courseArray.get(x).equals(courseArray.get(y)) && sameDay) || start2<start1 && start1 < end2 && !courseArray.get(x).equals(courseArray.get(y)) && sameDay) {
-								courseArray.get(x).setConflicting(true);
-								courseArray.get(y).setConflicting(true);
-								courseArray.get(x).setColor(Color.RED);
-								courseArray.get(y).setColor(Color.RED);
-								System.out.print("hello");
+							if(!courseArray.get(y).getSecondaryDay().equals(" ")) {
+								courseArray.get(x).checkOverlap(courseArray.get(y),"primary","secondary");
 							}
+							if(!courseArray.get(x).getSecondaryDay().equals(" ") && !courseArray.get(y).getSecondaryDay().equals(" ")) {
+								courseArray.get(x).checkOverlap(courseArray.get(y),"secondary","secondary");
+							}
+							
+							
+//							int start1 = courseArray.get(x).primaryMilitaryStart(courseArray.get(x).getPrimaryStartTime());
+//							int end1 =courseArray.get(x).primaryMilitaryStart(courseArray.get(x).getPrimaryEndTime());
+//							int start2 = courseArray.get(y).primaryMilitaryStart(courseArray.get(y).getPrimaryStartTime());
+//							int end2 =courseArray.get(y).primaryMilitaryStart(courseArray.get(y).getPrimaryEndTime());
+//							Boolean sameDay = false;
+//							
+//							for(int i = 0; i<courseArray.get(x).getPrimaryDayList().size(); i++) {
+//						
+//								if(courseArray.get(y).getPrimaryDayList().contains(courseArray.get(x).getPrimaryDayList().get(i)) && !courseArray.get(x).equals(courseArray.get(y))) {
+//									sameDay = true;
+//								}
+//							}
+//					
+//							if( (start2>start1 && start2 < end1 && !courseArray.get(x).equals(courseArray.get(y)) && sameDay) || start2<start1 && start1 < end2 && !courseArray.get(x).equals(courseArray.get(y)) && sameDay) {
+//								courseArray.get(x).setConflicting(true);
+//								courseArray.get(y).setConflicting(true);
+//								courseArray.get(x).setColor(Color.RED);
+//								courseArray.get(y).setColor(Color.RED);
+//							}
 						}
 					}
 					
@@ -125,7 +137,7 @@ public class ScheduleVisualizer extends Application {
 	}
 
 	public static void makeCourseBoxes(ArrayList<Course> courseArray, HashMap<String, Integer> coordinateDictionary, Group root, CalendarGenerator calendar) {
-
+		int count = 0;
 		for(Course course : courseArray) {
 			
 			String startTime = course.getPrimaryStartTime();
@@ -170,7 +182,7 @@ public class ScheduleVisualizer extends Application {
 					text.setWrapText(true);
 					text.setTranslateX(rectangle.getX() + 10);
 					text.setTranslateY(rectangle.getY() + 10);
-					text.setFont(Font.font("Verdana", 10));
+					text.setFont(Font.font("Serif", 10));
 					root.getChildren().add(rectangle);
 					root.getChildren().add(text);
 					calendar.createBoxDictionary(rectangle, xCoord, yCoord, height);
@@ -181,14 +193,30 @@ public class ScheduleVisualizer extends Application {
 			
 			for(String day : primaryDays) {
 				Rectangle rectangle = new Rectangle();
-
-				int xCoord1 = coordinateDictionary.get(day) - 24;
-				int yCoord1 = coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5;
-				rectangle.setX(xCoord1);
-				rectangle.setY(yCoord1);
+				int xCoord1;
+				int yCoord1;
+				double height1;
+				if(day.equals("None")) {
+					
+					xCoord1 = 75 + (count);
+					count+=100;
+					yCoord1 = 910;
+					height1 = 60;
+					rectangle.setX(xCoord1);
+					rectangle.setY(yCoord1);
+				}else {
+					xCoord1 = coordinateDictionary.get(day) - 24;
+					yCoord1 = coordinateDictionary.get(startTimeSplit[0]) + Integer.parseInt(startTimeSplit[1]) - 5;
+					rectangle.setX(xCoord1);
+					rectangle.setY(yCoord1);
+					height1 = (coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1])) - rectangle.getY() - 5;
+				}
+				
+				
+				
 				rectangle.setWidth(98);
 					
-				double height1 = (coordinateDictionary.get(endTimeSplit[0]) + Integer.parseInt(endTimeSplit[1])) - rectangle.getY() - 5;
+				
 				rectangle.setHeight(height1);
 				rectangle.setArcWidth(30.0); 
 				rectangle.setArcHeight(20.0);  
@@ -199,7 +227,8 @@ public class ScheduleVisualizer extends Application {
 				text.setWrapText(true);
 				text.setTranslateX(rectangle.getX() + 10);
 				text.setTranslateY(rectangle.getY() + 10);
-				text.setFont(Font.font("Verdana", 10));
+				text.setFont(Font.font("Serif", 10));
+				
 				root.getChildren().add(rectangle);
 				root.getChildren().add(text);
 					
@@ -211,7 +240,7 @@ public class ScheduleVisualizer extends Application {
 //				Label overlapWarning = new Label("You have conflicting class times in your schedule!");
 //				overlapWarning.setTranslateX(150);
 //				overlapWarning.setTranslateY(950);
-//				overlapWarning.setFont(Font.font("Verdana", 10));
+//				overlapWarning.setFont(Font.font("Serif", 10));
 //
 //				root.getChildren().add(overlapWarning);
 //				//System.out.println(overlapWarning + "hi");

@@ -70,7 +70,7 @@ public class TextHandler {
 					secondaryDay.add(courseCodes.size() - 1, splitInput[i]);
 				}
 				// checks if line is a time frame
-			} else if (current.contains(":")) {
+			} else if (current.contains(":") && (current.contains("AM")||current.contains("PM"))) {
 				// checks if the primary time for this class is empty still,
 				// if so, we add the time to primary times list
 				if (primaryTime.get(courseCodes.size() - 1).equals(" ")) {

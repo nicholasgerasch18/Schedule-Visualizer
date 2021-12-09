@@ -36,8 +36,6 @@ public interface CourseInterface {
 	
 	public int primaryMilitaryStart(String Time);
 	
-	public int primaryMilitaryEnd();
-	
 	public void setConflicting(Boolean conflict);
 	
 	public Boolean isConflicting();
@@ -49,4 +47,6 @@ public interface CourseInterface {
 	public ArrayList<String> getPrimaryDayList();
 	
 	public ArrayList<String> getSecondaryDayList();
+	
+	public void checkOverlap(Course second, String primaryCourse, String secondaryCourse);
 }
