@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 
+import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
 //test
@@ -49,4 +50,6 @@ public interface CourseInterface {
 	public ArrayList<String> getSecondaryDayList();
 	
 	public void checkOverlap(Course second, String primaryCourse, String secondaryCourse);
+
+	void checkOverlap(Course second, String primaryCourse, String secondaryCourse, Group root);
 }
