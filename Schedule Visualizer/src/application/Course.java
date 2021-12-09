@@ -53,16 +53,18 @@ public class Course implements CourseInterface {
 		secondaryDayList = new ArrayList<String>();
 		isConflicting = false;
 
-		// problematic
+		//if there is no primary day set the field to None
 		if (primaryDay.equals(" ")) {
 			this.primaryDay = "None";
 		}
 
 		String[] primaryDaySplit = primaryDay.split(" ");
+		//add each primary day of a course to an array list
 		for (int i = 0; i < primaryDaySplit.length; i++) {
 			primaryDayList.add(primaryDaySplit[i]);
 		}
 		this.primaryTime = primaryTime;
+		// checks if there was a primary time entered. if not sets it.
 		if (!primaryTime.equals(" ")) {
 			String[] primaryTimeArray = primaryTime.split("-");
 			primaryStartTime = primaryTimeArray[0].trim();
@@ -75,26 +77,28 @@ public class Course implements CourseInterface {
 
 		this.secondaryDay = secondaryDay;
 		this.secondaryTime = secondaryTime;
+		// checks if there was a secondary time
 		if (!secondaryTime.equals(" ")) {
 			String[] secondaryTimeArray = secondaryTime.split(" - ");
 			secondaryStartTime = secondaryTimeArray[0].trim();
 			secondaryEndTime = secondaryTimeArray[1].trim();
 			String[] secondaryDaySplit = secondaryDay.split(" ");
+			//splits secondary days into an array list
 			for (int x = 0; x < secondaryDaySplit.length; x++) {
 				secondaryDayList.add(secondaryDaySplit[x]);
 			}
 		}
 
+		new ArrayList<String>(Arrays.asList(classroom, teacherName, courseCode, courseName, primaryDay,
+				primaryTime, secondaryDay, secondaryTime));
+		//creates a random color
 		Random rn = new Random();
 		int num = rn.nextInt(100) + 155;
 		int num2 = rn.nextInt(100) + 155;
 		int num3 = rn.nextInt(100) + 155;
 		Color color = Color.rgb(num, num2, num3);
-
 		courseColor = color;
 
-		new ArrayList<String>(Arrays.asList(classroom, teacherName, courseCode, courseName, primaryDay,
-				primaryTime, secondaryDay, secondaryTime));
 	}
 
 	/**
@@ -230,6 +234,7 @@ public class Course implements CourseInterface {
 	@Override
 	public String toString(String whichDay) {
 		String courseDisplay = "";
+		// displays course depending on primary or secondary day
 		if (whichDay.equals("secondary")) {
 			courseDisplay = courseCode + " " + courseName + " \n" + secondaryTime;
 		} else {
@@ -254,10 +259,11 @@ public class Course implements CourseInterface {
 		// TODO Auto-generated method stub
 		int time = 0;
 		String[] primaryStartTimeSplit = Time.split(":");
-		// String[] primaryEndTimeSplit = primaryEndTime.split(":");
+		//if it is pm add 1200 to time
 		if (primaryStartTimeSplit[1].substring(2, 4).equals("PM")) {
 			time += 1200;
 		}
+		//if the first 2 numbers are anything but 12 times the number by 100 and add it
 		if (Integer.parseInt(primaryStartTimeSplit[0]) != 12) {
 			time += Integer.parseInt(primaryStartTimeSplit[0]) * 100;
 		}
@@ -300,9 +306,10 @@ public class Course implements CourseInterface {
 		// TODO Auto-generated method stub
 		return secondaryDayList;
 	}
+	
 
 	@Override
-	public void checkOverlap(Course second, String primaryCourse, String secondaryCourse, Group root) {
+	public void checkOverlap(Course secondCourse, String primaryCourse, String secondaryCourse) {
 		// TODO Auto-generated method stub
 		ArrayList<String> dayList;
 		ArrayList<String> dayList2;
@@ -310,6 +317,7 @@ public class Course implements CourseInterface {
 		int end1;
 		int start2;
 		int end2;
+		//if primary course is secondary then we look at secondary times
 		if (primaryCourse.equals("secondary")) {
 			start1 = primaryMilitaryStart(secondaryStartTime);
 			end1 = primaryMilitaryStart(secondaryEndTime);
@@ -319,43 +327,39 @@ public class Course implements CourseInterface {
 			end1 = primaryMilitaryStart(primaryEndTime);
 			dayList = this.primaryDayList;
 		}
-
+		//if secondary course is secondary then we look at secondary times
 		if (secondaryCourse.equals("secondary")) {
-			start2 = second.primaryMilitaryStart(second.getSecondaryStartTime());
-			end2 = second.primaryMilitaryStart(second.getSecondaryEndTime());
-			dayList2 = second.getSecondaryDayList();
+			start2 = secondCourse.primaryMilitaryStart(secondCourse.getSecondaryStartTime());
+			end2 = secondCourse.primaryMilitaryStart(secondCourse.getSecondaryEndTime());
+			dayList2 = secondCourse.getSecondaryDayList();
 		} else {
-			start2 = second.primaryMilitaryStart(second.getPrimaryStartTime());
-			end2 = second.primaryMilitaryStart(second.getPrimaryEndTime());
-			dayList2 = second.getPrimaryDayList();
+			start2 = secondCourse.primaryMilitaryStart(secondCourse.getPrimaryStartTime());
+			end2 = secondCourse.primaryMilitaryStart(secondCourse.getPrimaryEndTime());
+			dayList2 = secondCourse.getPrimaryDayList();
 		}
 
 		Boolean sameDay = false;
+		//loops through the primary courses daylist and verifies that the two courses have a class on same day
 		for (int i = 0; i < dayList.size(); i++) {
-			if (dayList2.contains(dayList.get(i)) && !this.equals(second)) {
+			if (dayList2.contains(dayList.get(i)) && !this.equals(secondCourse)) {
 				sameDay = true;
 			}
 		}
-		if ((start2 > start1 && start2 < end1 && !this.equals(second) && sameDay)
-				|| start2 < start1 && start1 < end2 && !this.equals(second) && sameDay) {
+		//checks if the start times overlap, they are not the same course, and that they occur on same day
+		if ((start2 > start1 && start2 < end1 && !this.equals(secondCourse) && sameDay)
+				|| start2 < start1 && start1 < end2 && !this.equals(secondCourse) && sameDay) {
 			this.setConflicting(true);
-			second.setConflicting(true);
+			secondCourse.setConflicting(true);
 			this.setColor(Color.RED);
-			second.setColor(Color.RED);
-			Text warningText = new Text("You have conflicting class times!");
-			warningText.setFont(Font.font("Verdana", 18));
-			warningText.setFill(Color.RED);
-			warningText.setX(280);
-			warningText.setY(900);
-			root.getChildren().add(warningText);
+			secondCourse.setColor(Color.RED);
+			
+			
+			
 		}
 	}
 
-	@Override
-	public void checkOverlap(Course second, String primaryCourse, String secondaryCourse) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+
 
 
 }

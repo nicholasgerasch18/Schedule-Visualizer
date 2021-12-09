@@ -74,28 +74,46 @@ public class ScheduleVisualizer extends Application {
 					for (int x = 0; x < courseArray.size() - 1; x++) {
 
 						for (int y = 0; y < courseArray.size(); y++) {
-
-							courseArray.get(x).checkOverlap(courseArray.get(y), "primary", "primary", root);
+							
+							//checks if two courses primary times overlap
+							courseArray.get(x).checkOverlap(courseArray.get(y), "primary", "primary");
+							//checks if the primary Courses's secondary time overlaps with the secondary courses primary time
 							if (!courseArray.get(x).getSecondaryDay().equals(" ")) {
-								courseArray.get(x).checkOverlap(courseArray.get(y), "secondary", "primary", root);
+								courseArray.get(x).checkOverlap(courseArray.get(y), "secondary", "primary");
 							}
+							//checks if the primary Courses's primary time overlaps with the secondary courses secondary time
 							if (!courseArray.get(y).getSecondaryDay().equals(" ")) {
-								courseArray.get(x).checkOverlap(courseArray.get(y), "primary", "secondary", root);
+								courseArray.get(x).checkOverlap(courseArray.get(y), "primary", "secondary");
 							}
+							//checks if the primary Courses's secondary time overlaps with the secondary courses secondary time
 							if (!courseArray.get(x).getSecondaryDay().equals(" ")
 									&& !courseArray.get(y).getSecondaryDay().equals(" ")) {
-								courseArray.get(x).checkOverlap(courseArray.get(y), "secondary", "secondary", root);
+								courseArray.get(x).checkOverlap(courseArray.get(y), "secondary", "secondary");
 							}
 
 						}
 					}
-
+					
 					// creates calendar
 					CalendarGenerator calendar = new CalendarGenerator(root);
 					calendar.getCalendar();
 					HashMap<String, Integer> dictionary = calendar.getCoordinateDictionary();
-
+					
+					//creates course boxes and places on calendar
 					makeCourseBoxes(courseArray, dictionary, root, calendar);
+					
+					//checks if there were any conflicting course
+					for(int i= 0; i<courseArray.size();i++) {
+						if(courseArray.get(i).isConflicting()) {
+							Text warningText = new Text("You have conflicting class times!");
+							warningText.setFont(Font.font("Verdana", 18));
+							warningText.setFill(Color.RED);
+							warningText.setX(280);
+							warningText.setY(900);
+							root.getChildren().add(warningText);
+							i = courseArray.size();
+						}
+					}
 
 					stage.setTitle("New Visualized Schedule!!");
 					stage.getTitle();

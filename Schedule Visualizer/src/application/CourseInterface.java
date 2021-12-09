@@ -50,6 +50,4 @@ public interface CourseInterface {
 	public ArrayList<String> getSecondaryDayList();
 	
 	public void checkOverlap(Course second, String primaryCourse, String secondaryCourse);
-
-	void checkOverlap(Course second, String primaryCourse, String secondaryCourse, Group root);
 }

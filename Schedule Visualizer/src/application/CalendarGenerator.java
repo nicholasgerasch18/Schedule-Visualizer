@@ -3,14 +3,18 @@ package application;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
-
 import javafx.scene.Group;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ * 
+ * @author Gabriel Vallejo
+ * 
+ *Generates a calendar implementing the CalendarInterface.
+ */
 public class CalendarGenerator implements CalendarInterface {
 
 	public Group root;
@@ -21,10 +25,10 @@ public class CalendarGenerator implements CalendarInterface {
 	private ArrayList<Integer> yCoordinates = new ArrayList<>();
 
 	/**
-	 * Generates the calendar to be used when adding courses.
+	 * Constructs the calendar to be used when adding courses.
 	 * 
 	 * @param root - the Group object to which all methods add the calendar drawings
-	 *             to
+	 *               to.
 	 */
 	public CalendarGenerator(Group root) {
 		this.root = root;
@@ -36,14 +40,16 @@ public class CalendarGenerator implements CalendarInterface {
 		makeCoordinateDictionary();
 
 	}
-	
+
 	/**
 	 * 
-	 * @return
+	 * @return - allows the calendar to be accessed in the main(ScheduleVisualizer)
+	 *         class.
 	 */
 	public Group getCalendar() {
 		return root;
 	}
+
 	/**
 	 * Adds the days of the week to the calendar.
 	 */
@@ -51,6 +57,7 @@ public class CalendarGenerator implements CalendarInterface {
 		String[] dayArray = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 		int x = 100;
 		int y = 10;
+		//for every day of the week it creates a text box and puts it in the correct location on the calendar
 		for (String item : dayArray) {
 			Text text = new Text(item);
 			text.setX(x);
@@ -75,7 +82,7 @@ public class CalendarGenerator implements CalendarInterface {
 
 		int x = 10;
 		int y = 40;
-
+		//for every time stamp it creates a text box and puts it on the correct location on the calendar
 		for (String timestamp : timeArray) {
 			Text time = new Text(timestamp);
 			time.setX(x);
@@ -156,10 +163,25 @@ public class CalendarGenerator implements CalendarInterface {
 		}
 	}
 
+	/**
+	 * Method allowing the coordinate dictionary to be accessed in the
+	 * main(ScheduleVisualizer) class
+	 * 
+	 * @return - coordinateDictionary
+	 */
 	public HashMap<String, Integer> getCoordinateDictionary() {
 		return coordinateDictionary;
 	}
 
+	/**
+	 * Creates the courseBox dictionary where the specs of the rectangles are stored
+	 * including the coordinate locations.
+	 * 
+	 * @param courseBox - the course being added to the calendar
+	 * @param xCoord    - the x coordinate of the course box
+	 * @param yCoord    - the top y coordinate of the course box
+	 * @param height    - the bottom y coordinate of the course box
+	 */
 	public void createBoxDictionary(Rectangle courseBox, int xCoord, int yCoord, double height) {
 
 		String value = Integer.toString(xCoord) + " " + Integer.toString(yCoord) + " " + Double.toString(height);

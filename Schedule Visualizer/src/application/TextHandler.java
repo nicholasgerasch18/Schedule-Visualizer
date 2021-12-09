@@ -88,6 +88,8 @@ public class TextHandler {
 		for (int n = 0; n < courseCodes.size(); n++) {
 			courseArray.add(new Course(courseCodes.get(n), courseName.get(n), teacherName.get(n), classroom.get(n),
 					primaryDay.get(n), secondaryDay.get(n), primaryTime.get(n), secondaryTime.get(n)));
+			
+			
 		}
 	}
 
