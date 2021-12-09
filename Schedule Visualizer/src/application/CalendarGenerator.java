@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
  * 
  * @author Gabriel Vallejo
  * 
- *Generates a calendar implementing the CalendarInterface.
+ *         Generates a calendar implementing the CalendarInterface.
  */
 public class CalendarGenerator implements CalendarInterface {
 
@@ -28,7 +28,7 @@ public class CalendarGenerator implements CalendarInterface {
 	 * Constructs the calendar to be used when adding courses.
 	 * 
 	 * @param root - the Group object to which all methods add the calendar drawings
-	 *               to.
+	 *             to.
 	 */
 	public CalendarGenerator(Group root) {
 		this.root = root;
@@ -57,7 +57,8 @@ public class CalendarGenerator implements CalendarInterface {
 		String[] dayArray = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 		int x = 100;
 		int y = 10;
-		//for every day of the week it creates a text box and puts it in the correct location on the calendar
+		// for every day of the week it creates a text box and puts it in the correct
+		// location on the calendar
 		for (String item : dayArray) {
 			Text text = new Text(item);
 			text.setX(x);
@@ -82,7 +83,8 @@ public class CalendarGenerator implements CalendarInterface {
 
 		int x = 10;
 		int y = 40;
-		//for every time stamp it creates a text box and puts it on the correct location on the calendar
+		// for every time stamp it creates a text box and puts it on the correct
+		// location on the calendar
 		for (String timestamp : timeArray) {
 			Text time = new Text(timestamp);
 			time.setX(x);

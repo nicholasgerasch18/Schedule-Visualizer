@@ -70,7 +70,7 @@ public class TextHandler {
 					secondaryDay.add(courseCodes.size() - 1, splitInput[i]);
 				}
 				// checks if line is a time frame
-			} else if (current.contains(":") && (current.contains("AM")||current.contains("PM"))) {
+			} else if (current.contains(":") && (current.contains("AM") || current.contains("PM"))) {
 				// checks if the primary time for this class is empty still,
 				// if so, we add the time to primary times list
 				if (primaryTime.get(courseCodes.size() - 1).equals(" ")) {
@@ -88,8 +88,7 @@ public class TextHandler {
 		for (int n = 0; n < courseCodes.size(); n++) {
 			courseArray.add(new Course(courseCodes.get(n), courseName.get(n), teacherName.get(n), classroom.get(n),
 					primaryDay.get(n), secondaryDay.get(n), primaryTime.get(n), secondaryTime.get(n)));
-			
-			
+
 		}
 	}
 

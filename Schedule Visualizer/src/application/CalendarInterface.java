@@ -15,6 +15,5 @@ public interface CalendarInterface {
 	public void addVerticalLines(Group root);
 
 	public void addHorizontalLines(Group root);
-	
 
 }

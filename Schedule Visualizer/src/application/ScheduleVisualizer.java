@@ -62,7 +62,7 @@ public class ScheduleVisualizer extends Application {
 					Scene scene = new Scene(root, 800, 1000);
 					scene.setFill(Color.AZURE);
 					Stage stage = new Stage();
-					stage.getIcons().add(new Image("AugieA.jpeg")); 
+					stage.getIcons().add(new Image("AugieA.jpeg"));
 
 					// gets text submitted
 					String input = textArea.getText();
@@ -74,18 +74,21 @@ public class ScheduleVisualizer extends Application {
 					for (int x = 0; x < courseArray.size() - 1; x++) {
 
 						for (int y = 0; y < courseArray.size(); y++) {
-							
-							//checks if two courses primary times overlap
+
+							// checks if two courses primary times overlap
 							courseArray.get(x).checkOverlap(courseArray.get(y), "primary", "primary");
-							//checks if the primary Courses's secondary time overlaps with the secondary courses primary time
+							// checks if the primary Courses's secondary time overlaps with the secondary
+							// courses primary time
 							if (!courseArray.get(x).getSecondaryDay().equals(" ")) {
 								courseArray.get(x).checkOverlap(courseArray.get(y), "secondary", "primary");
 							}
-							//checks if the primary Courses's primary time overlaps with the secondary courses secondary time
+							// checks if the primary Courses's primary time overlaps with the secondary
+							// courses secondary time
 							if (!courseArray.get(y).getSecondaryDay().equals(" ")) {
 								courseArray.get(x).checkOverlap(courseArray.get(y), "primary", "secondary");
 							}
-							//checks if the primary Courses's secondary time overlaps with the secondary courses secondary time
+							// checks if the primary Courses's secondary time overlaps with the secondary
+							// courses secondary time
 							if (!courseArray.get(x).getSecondaryDay().equals(" ")
 									&& !courseArray.get(y).getSecondaryDay().equals(" ")) {
 								courseArray.get(x).checkOverlap(courseArray.get(y), "secondary", "secondary");
@@ -93,18 +96,18 @@ public class ScheduleVisualizer extends Application {
 
 						}
 					}
-					
+
 					// creates calendar
 					CalendarGenerator calendar = new CalendarGenerator(root);
 					calendar.getCalendar();
 					HashMap<String, Integer> dictionary = calendar.getCoordinateDictionary();
-					
-					//creates course boxes and places on calendar
+
+					// creates course boxes and places on calendar
 					makeCourseBoxes(courseArray, dictionary, root, calendar);
-					
-					//checks if there were any conflicting course
-					for(int i= 0; i<courseArray.size();i++) {
-						if(courseArray.get(i).isConflicting()) {
+
+					// checks if there were any conflicting course
+					for (int i = 0; i < courseArray.size(); i++) {
+						if (courseArray.get(i).isConflicting()) {
 							Text warningText = new Text("You have conflicting class times!");
 							warningText.setFont(Font.font("Verdana", 18));
 							warningText.setFill(Color.RED);
@@ -128,13 +131,33 @@ public class ScheduleVisualizer extends Application {
 		}
 	}
 
+	/**
+	 * Sets alignment of the BorderPane (auto-generated)
+	 * 
+	 * @param root   - the Group object that stores all other objects to be drawn
+	 *               onto window
+	 * @param submit - the submit button
+	 */
 	private void extracted(BorderPane root, Button submit) {
 		BorderPane.setAlignment(submit, Pos.BOTTOM_CENTER);
 	}
 
+	/**
+	 * Creates the course boxes for every course submitted. Sets the box location,
+	 * box size, box color, box height, and the course information text onto the
+	 * box.
+	 * 
+	 * @param courseArray          - the list of courses submitted
+	 * @param coordinateDictionary - the mapped coordinate locations for days of the
+	 *                             week and hours of the day
+	 * @param root                 - where all boxes are drawn onto
+	 * @param calendar             - the generated calendar
+	 */
 	public static void makeCourseBoxes(ArrayList<Course> courseArray, HashMap<String, Integer> coordinateDictionary,
 			Group root, CalendarGenerator calendar) {
 		int count = 0;
+
+		// Iterates through every submitted course
 		for (Course course : courseArray) {
 
 			String startTime = course.getPrimaryStartTime();
@@ -147,6 +170,7 @@ public class ScheduleVisualizer extends Application {
 			endTimeSplit[1] = endTimeSplit[1].substring(0, 2);
 			String[] primaryDays = course.getPrimaryDay().split(" ");
 
+			// Checks to see if course has a secondary meeting day
 			if (course.getSecondaryDay() != " ") {
 				String secondaryStartTime = course.getSecondaryStartTime();
 				String secondaryEndTime = course.getSecondaryEndTime();
@@ -158,6 +182,7 @@ public class ScheduleVisualizer extends Application {
 				secondaryEndTimeSplit[1] = secondaryEndTimeSplit[1].substring(0, 2);
 				String[] SecondaryDays = course.getSecondaryDay().split(" ");
 
+				// Iterates through every second meeting day in in the array SecondaryDays
 				for (String day : SecondaryDays) {
 					int xCoord = coordinateDictionary.get(day) - 24;
 					int yCoord = coordinateDictionary.get(secondaryStartTimeSplit[0])
@@ -186,11 +211,14 @@ public class ScheduleVisualizer extends Application {
 				}
 			}
 
+			// Iterates through every primary meeting day
 			for (String day : primaryDays) {
 				Rectangle rectangle = new Rectangle();
 				int xCoord1;
 				int yCoord1;
 				double height1;
+
+				// checks to see if the course has no meeting day
 				if (day.equals("None")) {
 
 					xCoord1 = 75 + (count);
@@ -209,7 +237,6 @@ public class ScheduleVisualizer extends Application {
 				}
 
 				rectangle.setWidth(98);
-
 				rectangle.setHeight(height1);
 				rectangle.setArcWidth(30.0);
 				rectangle.setArcHeight(20.0);
