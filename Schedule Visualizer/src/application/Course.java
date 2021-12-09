@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import javafx.scene.Group;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class Course implements CourseInterface {
 
@@ -300,7 +303,7 @@ public class Course implements CourseInterface {
 	}
 
 	@Override
-	public void checkOverlap(Course second, String primaryCourse, String secondaryCourse) {
+	public void checkOverlap(Course second, String primaryCourse, String secondaryCourse, Group root) {
 		// TODO Auto-generated method stub
 		ArrayList<String> dayList;
 		ArrayList<String> dayList2;
@@ -339,7 +342,19 @@ public class Course implements CourseInterface {
 			second.setConflicting(true);
 			this.setColor(Color.RED);
 			second.setColor(Color.RED);
+			Text warningText = new Text("You have conflicting class times!");
+			warningText.setFont(Font.font("Verdana", 18));
+			warningText.setFill(Color.RED);
+			warningText.setX(280);
+			warningText.setY(900);
+			root.getChildren().add(warningText);
 		}
+	}
+
+	@Override
+	public void checkOverlap(Course second, String primaryCourse, String secondaryCourse) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
